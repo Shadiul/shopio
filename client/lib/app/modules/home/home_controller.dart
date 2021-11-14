@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 import '../../widgets/bottom_nav_bar/bottom_nav_bar_controller.dart';
+import '../account/account_view.dart';
 import '../explore/explore_view.dart';
 
 class HomeController extends GetxController {
@@ -34,7 +35,7 @@ class HomeController extends GetxController {
       case 2:
         return Container();
       case 3:
-        return Container();
+        return const AccountView();
       default:
         return Container();
     }

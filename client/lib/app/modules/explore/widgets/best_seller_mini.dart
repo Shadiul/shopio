@@ -57,7 +57,12 @@ class BestSellerMiniWidget extends GetWidget<ExploreController> {
                 children: [
                   Container(
                     height: 148.0,
-                    color: Colors.grey,
+                    decoration: const BoxDecoration(
+                      color: Colors.grey,
+                      borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(16.0),
+                      ),
+                    ),
                     child: const Icon(
                       Icons.shopping_bag,
                       size: 128,

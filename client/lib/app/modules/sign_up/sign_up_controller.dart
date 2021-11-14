@@ -12,6 +12,16 @@ class SignUpController extends GetxController {
   Rx<UiState> state = Rx(UiState.idle);
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  TextEditingController nameController = TextEditingController();
+  String? nameValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter your name';
+    } else if (value.length < 6) {
+      return 'Name should be at least 6 characters long';
+    }
+  }
+
   TextEditingController emailController = TextEditingController();
   String? emailValidator(String? value) {
     if (value == null || value.isEmpty) {

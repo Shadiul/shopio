@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import 'package:client/app/modules/account/account_binding.dart';
+import 'package:client/app/modules/account/account_view.dart';
 import 'package:client/app/modules/explore/explore_binding.dart';
 import 'package:client/app/modules/explore/explore_view.dart';
 
@@ -46,6 +48,11 @@ class AppPages {
       name: _Paths.EXPLORE,
       page: () => ExploreView(),
       binding: ExploreBinding(),
+    ),
+    GetPage(
+      name: _Paths.ACCOUNT,
+      page: () => AccountView(),
+      binding: AccountBinding(),
     ),
   ];
 }

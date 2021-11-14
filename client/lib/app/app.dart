@@ -29,10 +29,11 @@ class App extends StatelessWidget {
           elevation: 0,
           backgroundColor: Colors.transparent,
           foregroundColor: Colors.black87,
+          shadowColor: Colors.transparent,
           centerTitle: true,
         ),
         inputDecorationTheme: InputDecorationTheme(
-          contentPadding: EdgeInsets.zero,
+          contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(32.0),
             borderSide: BorderSide.none,
@@ -40,6 +41,17 @@ class App extends StatelessWidget {
           filled: true,
           fillColor: Colors.white,
           floatingLabelBehavior: FloatingLabelBehavior.never,
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ButtonStyle(
+            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            padding: MaterialStateProperty.all(
+              const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
+            ),
+            shape: MaterialStateProperty.all(
+              const StadiumBorder(),
+            ),
+          ),
         ),
         cardTheme: CardTheme(
           margin: EdgeInsets.zero,

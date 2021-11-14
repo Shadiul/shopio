@@ -22,7 +22,21 @@ class SignUpView extends GetView<SignUpController> {
         child: Form(
           key: controller.formKey,
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              TextFormField(
+                controller: controller.nameController,
+                validator: controller.nameValidator,
+                keyboardType: TextInputType.name,
+                onFieldSubmitted: (value) {
+                  FocusScope.of(context).unfocus();
+                },
+                decoration: const InputDecoration(
+                  label: Text('Name'),
+                  prefixIcon: Icon(Icons.account_circle),
+                ),
+              ),
+              const SizedBox(height: 8.0),
               TextFormField(
                 controller: controller.emailController,
                 validator: controller.emailValidator,
@@ -32,8 +46,10 @@ class SignUpView extends GetView<SignUpController> {
                 },
                 decoration: const InputDecoration(
                   label: Text('Email'),
+                  prefixIcon: Icon(Icons.email),
                 ),
               ),
+              const SizedBox(height: 8.0),
               TextFormField(
                 controller: controller.passwordController,
                 validator: controller.passwordValidator,
@@ -45,11 +61,18 @@ class SignUpView extends GetView<SignUpController> {
                 },
                 decoration: const InputDecoration(
                   label: Text('Password'),
+                  prefixIcon: Icon(Icons.password),
                 ),
               ),
+              const SizedBox(height: 16.0),
               ButtonBar(
                 alignment: MainAxisAlignment.spaceBetween,
+                buttonPadding: EdgeInsets.zero,
                 children: [
+                  TextButton(
+                    onPressed: controller.onTapAlreadyHaveAnAccount,
+                    child: const Text('Already have an account?'),
+                  ),
                   Obx(() => ElevatedButton(
                         onPressed: controller.state.value == UiState.loading
                             ? () {}
@@ -64,10 +87,6 @@ class SignUpView extends GetView<SignUpController> {
                               )
                             : Text('sign-up'.toUpperCase()),
                       )),
-                  TextButton(
-                    onPressed: controller.onTapAlreadyHaveAnAccount,
-                    child: const Text('Already have an account?'),
-                  ),
                 ],
               ),
             ],

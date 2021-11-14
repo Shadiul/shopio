@@ -22,6 +22,7 @@ class SignInView extends GetView<SignInController> {
         child: Form(
           key: controller.formKey,
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TextFormField(
                 controller: controller.emailController,
@@ -32,8 +33,10 @@ class SignInView extends GetView<SignInController> {
                 },
                 decoration: const InputDecoration(
                   label: Text('Email'),
+                  prefixIcon: Icon(Icons.email),
                 ),
               ),
+              const SizedBox(height: 8.0),
               TextFormField(
                 controller: controller.passwordController,
                 validator: controller.passwordValidator,
@@ -45,28 +48,32 @@ class SignInView extends GetView<SignInController> {
                 },
                 decoration: const InputDecoration(
                   label: Text('Password'),
+                  prefixIcon: Icon(Icons.password),
                 ),
               ),
+              const SizedBox(height: 16.0),
               ButtonBar(
                 alignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  ElevatedButton(
-                    onPressed: controller.state.value == UiState.loading
-                        ? () {}
-                        : controller.onTapSignIn,
-                    child: controller.state.value == UiState.loading
-                        ? SizedBox(
-                            height: 24.0,
-                            width: 24.0,
-                            child: CircularProgressIndicator(
-                              color: _themeData.colorScheme.onPrimary,
-                            ),
-                          )
-                        : Text('sign-in'.toUpperCase()),
-                  ),
                   TextButton(
                     onPressed: controller.onTapCreateAnAccount,
                     child: Text('Create and Account'.toUpperCase()),
+                  ),
+                  Obx(
+                    () => ElevatedButton(
+                      onPressed: controller.state.value == UiState.loading
+                          ? () {}
+                          : controller.onTapSignIn,
+                      child: controller.state.value == UiState.loading
+                          ? SizedBox(
+                              height: 24.0,
+                              width: 24.0,
+                              child: CircularProgressIndicator(
+                                color: _themeData.colorScheme.onPrimary,
+                              ),
+                            )
+                          : Text('sign-in'.toUpperCase()),
+                    ),
                   ),
                 ],
               ),
