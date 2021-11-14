@@ -1,9 +1,10 @@
+import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 import '../../widgets/app_drawer/app_drawer_widget.dart';
-import '../explore/explore_view.dart';
+import '../../widgets/bottom_nav_bar/bottom_nav_bar_controller.dart';
+import '../../widgets/bottom_nav_bar/bottom_nav_bar_widget.dart';
 import 'home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -11,11 +12,16 @@ class HomeView extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    ThemeData _themeData = Theme.of(context);
-    TextTheme _textTheme = _themeData.textTheme;
+    Get.put(BottomNavBarController());
+    // ThemeData _themeData = Theme.of(context);
+    // TextTheme _textTheme = _themeData.textTheme;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('HomeView'),
+        title: Obx(
+          () => Text(
+            controller.getAppBarTitle(),
+          ),
+        ),
         actions: [
           IconButton(
             onPressed: () {},
@@ -24,45 +30,20 @@ class HomeView extends GetView<HomeController> {
         ],
       ),
       drawer: const AppDrawerWidget(),
-      body: Column(
-        children: [
-          const Expanded(child: ExploreView()),
-          Container(
-            decoration: BoxDecoration(
-              color: _themeData.colorScheme.primaryVariant,
-              borderRadius: const BorderRadius.vertical(
-                top: Radius.circular(16.0),
-              ),
-            ),
-            child: Obx(
-              () => SalomonBottomBar(
-                currentIndex: controller.bottomNavIndex,
-                onTap: (value) => controller.bottomNavIndex = value,
-                selectedItemColor: _themeData.colorScheme.onPrimary,
-                unselectedItemColor: _themeData.colorScheme.onPrimary,
-                items: [
-                  SalomonBottomBarItem(
-                    title: const Text('Explore'),
-                    icon: const Icon(Icons.explore),
-                  ),
-                  SalomonBottomBarItem(
-                    title: const Text('Cart'),
-                    icon: const Icon(Icons.shopping_cart),
-                  ),
-                  SalomonBottomBarItem(
-                    title: const Text('Wishlist'),
-                    icon: const Icon(Icons.favorite),
-                  ),
-                  SalomonBottomBarItem(
-                    title: const Text('Account'),
-                    icon: const Icon(Icons.account_circle),
-                  ),
-                ],
-              ),
-            ),
+      body: Obx(
+        () => PageTransitionSwitcher(
+          duration: const Duration(milliseconds: 400),
+          transitionBuilder: (child, animation, secondaryAnimation) =>
+              SharedAxisTransition(
+            animation: animation,
+            secondaryAnimation: secondaryAnimation,
+            transitionType: SharedAxisTransitionType.scaled,
+            child: child,
           ),
-        ],
+          child: controller.getBodyView(),
+        ),
       ),
+      bottomNavigationBar: const BottomNavBarWidget(),
     );
   }
 }
