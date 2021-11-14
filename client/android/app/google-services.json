@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "885510524271",
+    "project_id": "shopio-031",
+    "storage_bucket": "shopio-031.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:885510524271:android:82f981cdf0bd8b4920ec9a",
+        "android_client_info": {
+          "package_name": "com.shopio.client"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "885510524271-fvjqp2oikqkp081j907bi0svi2d1esv2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.shopio.client",
+            "certificate_hash": "0d227d8689a58e6be945b268c535afe56c27bcd9"
+          }
+        },
+        {
+          "client_id": "885510524271-r6ptmsm15124ldvfc9p4bvs2472pia61.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJ6zM6YogHAm33E4Ip_xcoNvjKlW8YlBQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "885510524271-r6ptmsm15124ldvfc9p4bvs2472pia61.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
