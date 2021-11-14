@@ -29,6 +29,6 @@ class ResponseModel {
         break;
     }
     if (code != null) logColored(code!, color: color);
-    if (message != null) logColored(message, color: color);
+    logColored(message, color: color);
   }
 }

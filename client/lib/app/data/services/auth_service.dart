@@ -168,7 +168,7 @@ class AuthService extends GetxService {
           await _firestore.collection('users').doc(uid).get();
       response = ResponseModel(
         status: ResponseStatus.success,
-        message: 'User data fetch success',
+        message: '⏬ User data fetch success',
         data: UserModel.fromJson(userSnapshot.data() as Map<String, dynamic>),
       );
     } catch (e) {

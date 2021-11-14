@@ -1,13 +1,14 @@
+import 'package:client/app/widgets/app_drawer/app_drawer_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../home_controller.dart';
-
-class DrawerWidget extends GetWidget<HomeController> {
-  const DrawerWidget({Key? key}) : super(key: key);
+class AppDrawerWidget extends GetView<AppDrawerController> {
+  const AppDrawerWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    Get.put(AppDrawerController());
+
     // ThemeData _themeData = Theme.of(context);
     // TextTheme _textTheme = _themeData.textTheme;
     return Drawer(

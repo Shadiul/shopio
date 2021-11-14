@@ -1,8 +1,8 @@
+import 'package:client/app/widgets/app_drawer/app_drawer_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'home_controller.dart';
-import 'widgets/drawer_widget.dart';
 
 class HomeView extends GetView<HomeController> {
   const HomeView({Key? key}) : super(key: key);
@@ -16,7 +16,7 @@ class HomeView extends GetView<HomeController> {
         title: const Text('HomeView'),
         centerTitle: true,
       ),
-      drawer: const DrawerWidget(),
+      drawer: const AppDrawerWidget(),
       body: const Center(
         child: Text(
           'HomeView is working',
