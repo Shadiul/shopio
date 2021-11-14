@@ -5,18 +5,20 @@ import '../../data/enums.dart';
 import 'sign_up_controller.dart';
 
 class SignUpView extends GetView<SignUpController> {
+  const SignUpView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     ThemeData _themeData = Theme.of(context);
-    TextTheme _textTheme = _themeData.textTheme;
+    // TextTheme _textTheme = _themeData.textTheme;
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Sign-Up'),
+        title: const Text('Sign-Up'),
         centerTitle: true,
       ),
       body: Container(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Form(
           key: controller.formKey,
           child: Column(
@@ -28,7 +30,7 @@ class SignUpView extends GetView<SignUpController> {
                 onFieldSubmitted: (value) {
                   FocusScope.of(context).unfocus();
                 },
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   label: Text('Email'),
                 ),
               ),
@@ -41,7 +43,7 @@ class SignUpView extends GetView<SignUpController> {
                   FocusScope.of(context).unfocus();
                   await controller.onTapSignUp();
                 },
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   label: Text('Password'),
                 ),
               ),
@@ -49,8 +51,10 @@ class SignUpView extends GetView<SignUpController> {
                 alignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Obx(() => ElevatedButton(
-                        onPressed: controller.state.value == UiState.LOADING ? () {} : controller.onTapSignUp,
-                        child: controller.state.value == UiState.LOADING
+                        onPressed: controller.state.value == UiState.loading
+                            ? () {}
+                            : controller.onTapSignUp,
+                        child: controller.state.value == UiState.loading
                             ? SizedBox(
                                 height: 24.0,
                                 width: 24.0,
@@ -62,7 +66,7 @@ class SignUpView extends GetView<SignUpController> {
                       )),
                   TextButton(
                     onPressed: controller.onTapAlreadyHaveAnAccount,
-                    child: Text('Already have an account?'),
+                    child: const Text('Already have an account?'),
                   ),
                 ],
               ),

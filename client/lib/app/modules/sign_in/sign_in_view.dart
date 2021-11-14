@@ -5,18 +5,20 @@ import '../../data/enums.dart';
 import 'sign_in_controller.dart';
 
 class SignInView extends GetView<SignInController> {
+  const SignInView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     ThemeData _themeData = Theme.of(context);
-    TextTheme _textTheme = _themeData.textTheme;
+    // TextTheme _textTheme = _themeData.textTheme;
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Sign-In'),
+        title: const Text('Sign-In'),
         centerTitle: true,
       ),
       body: Container(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Form(
           key: controller.formKey,
           child: Column(
@@ -28,7 +30,7 @@ class SignInView extends GetView<SignInController> {
                 onFieldSubmitted: (value) {
                   FocusScope.of(context).unfocus();
                 },
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   label: Text('Email'),
                 ),
               ),
@@ -41,7 +43,7 @@ class SignInView extends GetView<SignInController> {
                   FocusScope.of(context).unfocus();
                   await controller.onTapSignIn();
                 },
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   label: Text('Password'),
                 ),
               ),
@@ -49,8 +51,10 @@ class SignInView extends GetView<SignInController> {
                 alignment: MainAxisAlignment.spaceBetween,
                 children: [
                   ElevatedButton(
-                    onPressed: controller.state.value == UiState.LOADING ? () {} : controller.onTapSignIn,
-                    child: controller.state.value == UiState.LOADING
+                    onPressed: controller.state.value == UiState.loading
+                        ? () {}
+                        : controller.onTapSignIn,
+                    child: controller.state.value == UiState.loading
                         ? SizedBox(
                             height: 24.0,
                             width: 24.0,

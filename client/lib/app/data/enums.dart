@@ -1,1 +1,3 @@
-enum UiState { IDLE, LOADING, SUCCESS, ERROR }
+enum UiState { idle, loading, success, error }
+
+enum ResponseStatus { empty, success, error }

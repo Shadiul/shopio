@@ -1,14 +1,14 @@
 import 'package:get/get.dart';
 
 import '../../data/enums.dart';
+import '../../data/models/response_model.dart';
 import '../../data/services/services.dart';
 import '../../routes/app_pages.dart';
-import '../../utils/log_colored.dart';
 
 class SplashController extends GetxController {
   final AuthService _authService = Get.find<AuthService>();
 
-  Rx<UiState> state = Rx(UiState.IDLE);
+  Rx<UiState> state = Rx(UiState.idle);
 
   @override
   Future<void> onReady() async {
@@ -17,16 +17,14 @@ class SplashController extends GetxController {
   }
 
   Future<void> startApp() async {
-    state.value = UiState.LOADING;
-    await Future.delayed(Duration(seconds: 1));
+    state.value = UiState.loading;
+    await Future.delayed(const Duration(seconds: 1));
 
-    logColored('🔍 Looking for logged in account', color: LogColor.White);
-    await _authService.tryAutoSignIn();
-    if (_authService.user == null) {
-      await Get.offAndToNamed(Routes.SIGN_IN);
-    } else {
-      logColored('😀 Found logged in user: ${_authService.user!.email}', color: LogColor.Green);
+    ResponseModel response = await _authService.tryAutoSignIn();
+    if (response.status == ResponseStatus.success) {
       await Get.offAndToNamed(Routes.HOME);
+    } else {
+      await Get.offAndToNamed(Routes.SIGN_IN);
     }
   }
 

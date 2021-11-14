@@ -5,5 +5,5 @@ import 'app/data/services/services.dart';
 
 Future<void> main() async {
   await initServices();
-  runApp(App());
+  runApp(const App());
 }

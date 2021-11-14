@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names, prefer_const_constructors
+
 import 'package:get/get.dart';
 
 import '../modules/home/home_binding.dart';

@@ -12,12 +12,7 @@ import '../../routes/app_pages.dart';
 class SignInController extends GetxController {
   final AuthService _authService = Get.find<AuthService>();
 
-  Rx<UiState> state = Rx(UiState.IDLE);
-
-  @override
-  void onInit() {
-    super.onInit();
-  }
+  Rx<UiState> state = Rx(UiState.idle);
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
@@ -39,7 +34,7 @@ class SignInController extends GetxController {
   }
 
   Future<void> onTapSignIn() async {
-    state.value = UiState.LOADING;
+    state.value = UiState.loading;
 
     bool? isValid = formKey.currentState?.validate();
 
@@ -50,16 +45,18 @@ class SignInController extends GetxController {
       );
 
       if (response is UserModel) {
-        state.value = UiState.SUCCESS;
+        state.value = UiState.success;
         await Get.offNamed(Routes.HOME);
       } else {
         log(response.toString());
-        state.value = UiState.ERROR;
+        state.value = UiState.error;
 
-        await Get.defaultDialog(title: 'Error!', middleText: (response as FirebaseAuthException).message!);
+        await Get.defaultDialog(
+            title: 'Error!',
+            middleText: (response as FirebaseAuthException).message!);
       }
     } else {
-      state.value = UiState.IDLE;
+      state.value = UiState.idle;
     }
   }
 
