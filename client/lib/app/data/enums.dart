@@ -1,0 +1,1 @@
+enum UiState { IDLE, LOADING, SUCCESS, ERROR }
