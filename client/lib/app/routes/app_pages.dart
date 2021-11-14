@@ -2,6 +2,10 @@ import 'package:get/get.dart';
 
 import '../modules/home/home_binding.dart';
 import '../modules/home/home_view.dart';
+import '../modules/sign_in/sign_in_binding.dart';
+import '../modules/sign_in/sign_in_view.dart';
+import '../modules/sign_up/sign_up_binding.dart';
+import '../modules/sign_up/sign_up_view.dart';
 import '../modules/splash/splash_binding.dart';
 import '../modules/splash/splash_view.dart';
 
@@ -22,6 +26,16 @@ class AppPages {
       name: _Paths.HOME,
       page: () => HomeView(),
       binding: HomeBinding(),
+    ),
+    GetPage(
+      name: _Paths.SIGN_IN,
+      page: () => SignInView(),
+      binding: SignInBinding(),
+    ),
+    GetPage(
+      name: _Paths.SIGN_UP,
+      page: () => SignUpView(),
+      binding: SignUpBinding(),
     ),
   ];
 }
