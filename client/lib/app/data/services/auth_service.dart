@@ -40,6 +40,7 @@ class AuthService extends GetxService {
   }
 
   Future<ResponseModel> signUp({
+    required String name,
     required String email,
     required String password,
   }) async {
@@ -53,6 +54,7 @@ class AuthService extends GetxService {
 
       _user = UserModel(
         uid: userCredential.user!.uid,
+        name: name,
         email: email,
       );
 

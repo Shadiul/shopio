@@ -28,7 +28,7 @@ class AccountView extends GetView<AccountController> {
         ),
         const SizedBox(height: 8.0),
         Text(
-          'User Name',
+          controller.user.name,
           textAlign: TextAlign.center,
           style: _textTheme.headline6,
         ),

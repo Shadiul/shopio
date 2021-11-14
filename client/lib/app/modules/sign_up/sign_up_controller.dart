@@ -47,6 +47,7 @@ class SignUpController extends GetxController {
 
     if (isValid != null && isValid) {
       final ResponseModel response = await _authService.signUp(
+        name: nameController.text,
         email: emailController.text,
         password: passwordController.text,
       );
