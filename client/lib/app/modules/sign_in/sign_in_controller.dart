@@ -1,11 +1,8 @@
-import 'dart:developer';
-
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../data/enums.dart';
-import '../../data/models/user_model.dart';
+import '../../data/models/response_model.dart';
 import '../../data/services/services.dart';
 import '../../routes/app_pages.dart';
 
@@ -39,25 +36,24 @@ class SignInController extends GetxController {
     bool? isValid = formKey.currentState?.validate();
 
     if (isValid != null && isValid) {
-      final response = await _authService.signIn(
+      final ResponseModel response = await _authService.signIn(
         email: emailController.text,
         password: passwordController.text,
       );
 
-      if (response is UserModel) {
+      if (response.status == ResponseStatus.success) {
         state.value = UiState.success;
         await Get.offNamed(Routes.HOME);
       } else {
-        log(response.toString());
         state.value = UiState.error;
-
         await Get.defaultDialog(
-            title: 'Error!',
-            middleText: (response as FirebaseAuthException).message!);
+          title: 'Error!',
+          middleText: response.message,
+        );
+        return;
       }
-    } else {
-      state.value = UiState.idle;
     }
+    state.value = UiState.idle;
   }
 
   Future<void> onTapCreateAnAccount() async {

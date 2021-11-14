@@ -3,10 +3,16 @@ import '../enums.dart';
 
 class ResponseModel {
   final ResponseStatus status;
+  final String? code;
   final String message;
   final dynamic data;
 
-  ResponseModel({required this.status, required this.message, this.data}) {
+  ResponseModel({
+    required this.status,
+    this.code,
+    required this.message,
+    this.data,
+  }) {
     LogColor color = LogColor.white;
     switch (status) {
       case ResponseStatus.empty:
@@ -22,6 +28,7 @@ class ResponseModel {
         color = LogColor.white;
         break;
     }
-    logColored(message, color: color);
+    if (code != null) logColored(code!, color: color);
+    if (message != null) logColored(message, color: color);
   }
 }

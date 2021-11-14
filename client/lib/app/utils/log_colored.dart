@@ -3,32 +3,36 @@ import 'dart:developer';
 enum LogColor { black, red, green, yellow, blue, magenta, cyan, white }
 
 void logColored(String value, {LogColor? color}) {
+  String colorCode;
   switch (color) {
     case LogColor.black:
-      log('\x1B[30m$value\x1B[0m', stackTrace: StackTrace.current);
+      colorCode = '\x1B[30m';
       break;
     case LogColor.red:
-      log('\x1B[31m$value\x1B[0m');
+      colorCode = '\x1B[31m';
       break;
     case LogColor.green:
-      log('\x1B[32m$value\x1B[0m');
+      colorCode = '\x1B[32m';
       break;
     case LogColor.yellow:
-      log('\x1B[33m$value\x1B[0m');
+      colorCode = '\x1B[33m';
       break;
     case LogColor.blue:
-      log('\x1B[34m$value\x1B[0m');
+      colorCode = '\x1B[34m';
       break;
     case LogColor.magenta:
-      log('\x1B[35m$value\x1B[0m');
+      colorCode = '\x1B[35m';
       break;
     case LogColor.cyan:
-      log('\x1B[36m$value\x1B[0m');
+      colorCode = '\x1B[36m';
       break;
     case LogColor.white:
-      log('\x1B[37m$value\x1B[0m');
+      colorCode = '\x1B[37m';
       break;
     default:
-      log(value);
+      colorCode = '';
+      break;
   }
+
+  log('$colorCode$value\x1B[0m');
 }

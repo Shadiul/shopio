@@ -26,7 +26,7 @@ class AuthService extends GetxService {
     if (_auth.currentUser == null) {
       response = ResponseModel(
         status: ResponseStatus.empty,
-        message: 'No logged in user found',
+        message: '⭕ No logged in user found',
       );
     } else {
       logColored(
@@ -63,21 +63,22 @@ class AuthService extends GetxService {
         data: _user,
       );
     } on FirebaseAuthException catch (e) {
-      String message;
-      switch (e.code) {
-        case 'weak-password':
-          message = 'The password provided is too weak.';
-          break;
-        case 'email-already-in-use':
-          message = 'The account already exists for that email.';
-          break;
-        default:
-          message = e.code;
-          break;
-      }
+      // String message;
+      // switch (e.code) {
+      //   case 'weak-password':
+      //     message = 'The password provided is too weak.';
+      //     break;
+      //   case 'email-already-in-use':
+      //     message = 'The account already exists for that email.';
+      //     break;
+      //   default:
+      //     message = e.code;
+      //     break;
+      // }
       response = ResponseModel(
         status: ResponseStatus.error,
-        message: message,
+        code: e.code,
+        message: e.message ?? 'No Message, Check code',
       );
     } catch (e) {
       logger.e(e);
@@ -109,21 +110,46 @@ class AuthService extends GetxService {
         message: 'Sign in success',
       );
     } on FirebaseAuthException catch (e) {
-      String message;
-      switch (e.code) {
-        case 'user-not-found':
-          message = 'No user found for that email.';
-          break;
-        case 'wrong-password':
-          message = 'Wrong password provided for that user.';
-          break;
-        default:
-          message = e.code;
-          break;
-      }
+      // String message;
+      // switch (e.code) {
+      //   case 'user-not-found':
+      //     message = 'No user found for that email.';
+      //     break;
+      //   case 'wrong-password':
+      //     message = 'Wrong password provided for that user.';
+      //     break;
+      //   default:
+      //     message = e.code;
+      //     break;
+      // }
       response = ResponseModel(
         status: ResponseStatus.error,
-        message: message,
+        code: e.code,
+        message: e.message ?? 'No Message, Check code',
+      );
+    } catch (e) {
+      response = ResponseModel(
+        status: ResponseStatus.error,
+        message: e.toString(),
+      );
+    }
+
+    return response;
+  }
+
+  Future<ResponseModel> signOut() async {
+    ResponseModel response;
+    try {
+      await _auth.signOut();
+      response = ResponseModel(
+        status: ResponseStatus.success,
+        message: 'Signout Success',
+      );
+    } on FirebaseAuthException catch (e) {
+      response = ResponseModel(
+        status: ResponseStatus.error,
+        code: e.code,
+        message: e.message ?? 'No Message, Check code',
       );
     } catch (e) {
       response = ResponseModel(
