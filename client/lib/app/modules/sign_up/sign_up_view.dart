@@ -11,10 +11,34 @@ class SignUpView extends GetView<SignUpController> {
         title: Text('Sign-Up'),
         centerTitle: true,
       ),
-      body: Center(
-        child: Text(
-          'SignUpView is working',
-          style: TextStyle(fontSize: 20),
+      body: Container(
+        padding: EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            TextFormField(
+              decoration: InputDecoration(
+                label: Text('Email'),
+              ),
+            ),
+            TextFormField(
+              decoration: InputDecoration(
+                label: Text('Password'),
+              ),
+            ),
+            ButtonBar(
+              alignment: MainAxisAlignment.spaceBetween,
+              children: [
+                ElevatedButton(
+                  onPressed: controller.onTapSignUp,
+                  child: Text('sign-up'.toUpperCase()),
+                ),
+                TextButton(
+                  onPressed: controller.onTapAlreadyHaveAnAccount,
+                  child: Text('Already have an account?'),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );

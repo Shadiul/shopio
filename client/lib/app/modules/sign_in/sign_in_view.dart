@@ -11,10 +11,34 @@ class SignInView extends GetView<SignInController> {
         title: Text('Sign-In'),
         centerTitle: true,
       ),
-      body: Center(
-        child: Text(
-          'SignInView is working',
-          style: TextStyle(fontSize: 20),
+      body: Container(
+        padding: EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            TextFormField(
+              decoration: InputDecoration(
+                label: Text('Email'),
+              ),
+            ),
+            TextFormField(
+              decoration: InputDecoration(
+                label: Text('Password'),
+              ),
+            ),
+            ButtonBar(
+              alignment: MainAxisAlignment.spaceBetween,
+              children: [
+                ElevatedButton(
+                  onPressed: controller.onTapSignIn,
+                  child: Text('sign-in'.toUpperCase()),
+                ),
+                TextButton(
+                  onPressed: controller.onTapCreateAnAccount,
+                  child: Text('Create and Account'.toUpperCase()),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );
