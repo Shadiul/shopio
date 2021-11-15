@@ -11,10 +11,10 @@ export 'auth_service.dart';
 
 Future<void> initServices() async {
   logColored('📦 Starting services', color: LogColor.white);
-  FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
   await Get.putAsync(
     () => AuthService(_firebaseAuth, _firebaseFirestore).init(),
   );
