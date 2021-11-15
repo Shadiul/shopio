@@ -1,0 +1,34 @@
+{
+  "data": [
+    {
+      "id": "0",
+      "name": "Clothings",
+      "icon": "category_clothing"
+    },
+    {
+      "id": "1",
+      "name": "Grocery",
+      "icon": "category_grocery"
+    },
+    {
+      "id": "2",
+      "name": "Electronic Devices",
+      "icon": "category_electronic_devices"
+    },
+    {
+      "id": "3",
+      "name": "Electronic Accessories",
+      "icon": "category_electronic_accessories"
+    },
+    {
+      "id": "4",
+      "name": "Health",
+      "icon": "category_health"
+    },
+    {
+      "id": "5",
+      "name": "Beauty",
+      "icon": "category_beauty"
+    }
+  ]
+}
