@@ -19,7 +19,6 @@ class SplashController extends GetxController {
   Future<void> startApp() async {
     state.value = UiState.loading;
     await Future.delayed(const Duration(seconds: 1));
-
     ResponseModel response = await _authService.tryAutoSignIn();
     if (response.status == ResponseStatus.success) {
       await Get.offAndToNamed(Routes.HOME);

@@ -9,12 +9,16 @@ import '../models/response_model.dart';
 import '../models/user_model.dart';
 
 class AuthService extends GetxService {
+  final FirebaseAuth auth;
+  final FirebaseFirestore firestore;
+  AuthService(
+    this.auth,
+    this.firestore,
+  );
   Future<AuthService> init() async {
+    await tryAutoSignIn();
     return this;
   }
-
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   Logger logger = Logger();
   UserModel? _user;
@@ -23,17 +27,18 @@ class AuthService extends GetxService {
   Future<ResponseModel> tryAutoSignIn() async {
     logColored('🔍 Looking for logged in account', color: LogColor.white);
     ResponseModel response;
-    if (_auth.currentUser == null) {
+    print(auth.currentUser);
+    if (auth.currentUser == null) {
       response = ResponseModel(
         status: ResponseStatus.empty,
         message: '⭕ No logged in user found',
       );
     } else {
       logColored(
-        '😀 Found logged in user: ${_auth.currentUser!.email}',
+        '😀 Found logged in user: ${auth.currentUser!.email}',
         color: LogColor.green,
       );
-      response = await getUserData(_auth.currentUser!.uid);
+      response = await getUserData(auth.currentUser!.uid);
       _user = response.data;
     }
     return response;
@@ -46,8 +51,7 @@ class AuthService extends GetxService {
   }) async {
     ResponseModel response;
     try {
-      UserCredential userCredential =
-          await _auth.createUserWithEmailAndPassword(
+      UserCredential userCredential = await auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
@@ -58,7 +62,7 @@ class AuthService extends GetxService {
         email: email,
       );
 
-      await _firestore.collection('users').doc(_user!.uid).set(_user!.toJson());
+      await firestore.collection('users').doc(_user!.uid).set(_user!.toJson());
       response = ResponseModel(
         status: ResponseStatus.success,
         message: 'Sign-Up Success',
@@ -98,7 +102,7 @@ class AuthService extends GetxService {
   }) async {
     ResponseModel response;
     try {
-      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+      UserCredential userCredential = await auth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
@@ -142,7 +146,7 @@ class AuthService extends GetxService {
   Future<ResponseModel> signOut() async {
     ResponseModel response;
     try {
-      await _auth.signOut();
+      await auth.signOut();
       response = ResponseModel(
         status: ResponseStatus.success,
         message: 'Signout Success',
@@ -167,7 +171,7 @@ class AuthService extends GetxService {
     ResponseModel response;
     try {
       DocumentSnapshot userSnapshot =
-          await _firestore.collection('users').doc(uid).get();
+          await firestore.collection('users').doc(uid).get();
       response = ResponseModel(
         status: ResponseStatus.success,
         message: '⏬ User data fetch success',
