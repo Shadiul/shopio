@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../data/core/values/strings.dart';
 import '../../data/enums.dart';
 import '../../data/models/response_model.dart';
 import '../../data/services/services.dart';
@@ -15,18 +16,18 @@ class SignInController extends GetxController {
   TextEditingController emailController = TextEditingController();
   String? emailValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Please enter your email';
+      return Strings.validationMessages.emptyEmail;
     } else if (!GetUtils.isEmail(value)) {
-      return 'Invalid email';
+      return Strings.validationMessages.invalidEmail;
     }
   }
 
   TextEditingController passwordController = TextEditingController();
   String? passwordValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Please create a password';
+      return Strings.validationMessages.emptyPassword;
     } else if (value.length < 6) {
-      return 'Password must be at least 6 characters long';
+      return Strings.validationMessages.shortPassword;
     }
   }
 

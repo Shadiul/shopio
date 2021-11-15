@@ -11,12 +11,9 @@ import '../models/user_model.dart';
 class AuthService extends GetxService {
   final FirebaseAuth auth;
   final FirebaseFirestore firestore;
-  AuthService(
-    this.auth,
-    this.firestore,
-  );
+  AuthService(this.auth, this.firestore);
+
   Future<AuthService> init() async {
-    await tryAutoSignIn();
     return this;
   }
 
@@ -27,7 +24,6 @@ class AuthService extends GetxService {
   Future<ResponseModel> tryAutoSignIn() async {
     logColored('🔍 Looking for logged in account', color: LogColor.white);
     ResponseModel response;
-    print(auth.currentUser);
     if (auth.currentUser == null) {
       response = ResponseModel(
         status: ResponseStatus.empty,
