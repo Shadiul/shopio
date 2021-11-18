@@ -1,10 +1,9 @@
 import 'package:get/get.dart';
 
-import 'package:client/app/modules/account/account_binding.dart';
-import 'package:client/app/modules/account/account_view.dart';
-import 'package:client/app/modules/explore/explore_binding.dart';
-import 'package:client/app/modules/explore/explore_view.dart';
-
+import '../modules/account/account_binding.dart';
+import '../modules/account/account_view.dart';
+import '../modules/explore/explore_binding.dart';
+import '../modules/explore/explore_view.dart';
 import '../modules/home/home_binding.dart';
 import '../modules/home/home_view.dart';
 import '../modules/sign_in/sign_in_binding.dart';
