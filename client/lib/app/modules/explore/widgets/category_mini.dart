@@ -56,7 +56,8 @@ class CategoryMiniWidget extends GetWidget<ExploreController> {
                         child: Column(
                           children: [
                             MaterialButton(
-                              onPressed: () {},
+                              onPressed: () async =>
+                                  controller.onTapCategory(category),
                               shape: const CircleBorder(),
                               color: _themeData.colorScheme.primary,
                               materialTapTargetSize:

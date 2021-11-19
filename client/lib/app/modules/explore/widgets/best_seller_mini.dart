@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../data/models/models.dart';
+import '../../../widgets/product_card_widget.dart';
 import '../explore_controller.dart';
 
 class BestSellerMiniWidget extends GetWidget<ExploreController> {
@@ -51,44 +53,16 @@ class BestSellerMiniWidget extends GetWidget<ExploreController> {
               mainAxisExtent: 220,
             ),
             itemCount: 4,
-            itemBuilder: (context, index) => Card(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Container(
-                    height: 148.0,
-                    decoration: const BoxDecoration(
-                      color: Colors.grey,
-                      borderRadius: BorderRadius.vertical(
-                        top: Radius.circular(16.0),
-                      ),
-                    ),
-                    child: const Icon(
-                      Icons.shopping_bag,
-                      size: 128,
-                    ),
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          Text(
-                            '2000\$',
-                            style: _textTheme.headline6,
-                          ),
-                          Expanded(
-                            child: Text(
-                              'Product Name',
-                              style: _textTheme.subtitle2,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  )
-                ],
+            itemBuilder: (context, index) => ProductCardWidget(
+              product: ProductModel(
+                id: '1',
+                description: 'asdasd',
+                discount: 10,
+                name: 'asdad',
+                price: 1000.0,
+                stockQuantity: 50,
+                unit: 'pcs',
+                categoryId: '1',
               ),
             ),
           ),

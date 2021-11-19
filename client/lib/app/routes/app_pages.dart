@@ -1,5 +1,8 @@
 import 'package:get/get.dart';
 
+import 'package:client/app/modules/product_list/product_list_binding.dart';
+import 'package:client/app/modules/product_list/product_list_view.dart';
+
 import '../modules/account/account_binding.dart';
 import '../modules/account/account_view.dart';
 import '../modules/explore/explore_binding.dart';
@@ -52,6 +55,11 @@ class AppPages {
       name: _Paths.ACCOUNT,
       page: () => AccountView(),
       binding: AccountBinding(),
+    ),
+    GetPage(
+      name: _Paths.PRODUCT_LIST,
+      page: () => ProductListView(),
+      binding: ProductListBinding(),
     ),
   ];
 }

@@ -1,3 +1,7 @@
+import 'package:get/get.dart';
+
+import '../../utils/log_colored.dart';
+import '../services/services.dart';
 import 'category_model.dart';
 
 class ProductModel {
@@ -6,9 +10,10 @@ class ProductModel {
   final String description;
   final double price;
   final int discount;
-  final CategoryModel category;
+  final String? categoryId;
   final String unit;
   int stockQuantity;
+  final List<String> images;
 
   ProductModel({
     required this.id,
@@ -16,9 +21,10 @@ class ProductModel {
     required this.description,
     required this.price,
     required this.discount,
-    required this.category,
+    this.categoryId,
     required this.unit,
     required this.stockQuantity,
+    this.images = const [],
   });
 
   double get priceAfterDiscount => (price * discount) / 100;
@@ -29,11 +35,12 @@ class ProductModel {
       id: json['id'],
       name: json['name'],
       description: json['description'],
-      price: json['price'],
-      category: json['category'],
+      price: _toPriceDouble(json['price']),
+      categoryId: json['category_id'],
       unit: json['unit'],
       discount: json['discount'] ?? 0.0,
       stockQuantity: json['stock_quantity'] ?? 0,
+      images: _mapImages(json['images']),
     );
   }
 
@@ -44,11 +51,41 @@ class ProductModel {
     data['name'] = name;
     data['description'] = description;
     data['price'] = price;
-    data['category'] = category;
+    data['category'] = categoryId;
     data['unit'] = unit;
     data['discount'] = discount;
     data['stock_quantity'] = stockQuantity;
 
     return data;
+  }
+
+  static double _toPriceDouble(dynamic value) {
+    if (value is int) {
+      return value.toDouble();
+    } else if (value is double) {
+      return value;
+    } else if (value is String) {
+      try {
+        return double.parse(value);
+      } catch (e) {
+        logColored(e.toString(), color: LogColor.red);
+        return 0.0;
+      }
+    } else {
+      return 0.0;
+    }
+  }
+
+  static Future<CategoryModel?> _getCategory(String category) async {
+    final FirestoreService _firestoreService = Get.find<FirestoreService>();
+    return await _firestoreService.getCategoryData(category);
+  }
+
+  static List<String> _mapImages(List<dynamic>? data) {
+    if (data is List) {
+      return List<String>.from(data.map((e) => e)).toList();
+    } else {
+      return [];
+    }
   }
 }

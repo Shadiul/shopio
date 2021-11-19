@@ -2,32 +2,38 @@
   "data": [
     {
       "id": "0",
-      "name": "Clothings",
+      "category": "clothings",
+      "label": "Clothings",
       "icon": "category_clothing"
     },
     {
       "id": "1",
-      "name": "Grocery",
+      "category": "grocery",
+      "label": "Grocery",
       "icon": "category_grocery"
     },
     {
       "id": "2",
-      "name": "Electronic Devices",
+      "category": "electronic_devices",
+      "label": "Electronic Devices",
       "icon": "category_electronic_devices"
     },
     {
       "id": "3",
-      "name": "Electronic Accessories",
+      "category": "electronic_accessories",
+      "label": "Electronic Accessories",
       "icon": "category_electronic_accessories"
     },
     {
       "id": "4",
-      "name": "Health",
+      "category": "health",
+      "label": "Health",
       "icon": "category_health"
     },
     {
       "id": "5",
-      "name": "Beauty",
+      "category": "beauty",
+      "label": "Beauty",
       "icon": "category_beauty"
     }
   ]
