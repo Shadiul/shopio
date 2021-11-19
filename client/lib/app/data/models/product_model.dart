@@ -1,8 +1,4 @@
-import 'package:get/get.dart';
-
 import '../../utils/log_colored.dart';
-import '../services/services.dart';
-import 'category_model.dart';
 
 class ProductModel {
   final String id;
@@ -74,11 +70,6 @@ class ProductModel {
     } else {
       return 0.0;
     }
-  }
-
-  static Future<CategoryModel?> _getCategory(String category) async {
-    final FirestoreService _firestoreService = Get.find<FirestoreService>();
-    return await _firestoreService.getCategoryData(category);
   }
 
   static List<String> _mapImages(List<dynamic>? data) {

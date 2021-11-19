@@ -12,35 +12,10 @@ class ExploreController extends GetxController {
   @override
   Future<void> onReady() async {
     categories.bindStream(streamCategoriesList());
-    // await getCategories();
     super.onReady();
   }
 
   RxList<CategoryModel> categories = RxList<CategoryModel>();
-  // Future<void> getCategories() async {
-  //   categoriesState.value = UiState.loading;
-  // logColored('📦 Loading fake categories from asset', color: LogColor.white);
-
-  // try {
-  //   final categoryBundleData = await rootBundle.loadString(
-  //     'assets/json/fake_categories.json',
-  //   );
-  //   final jsonData = jsonDecode(categoryBundleData);
-  //   categories.value = List.from((jsonData['data'] as List).map(
-  //     (e) => CategoryModel.fromJson(e),
-  //   ));
-  //   logColored(
-  //     '📦 Success loading fake categories from asset',
-  //     color: LogColor.green,
-  //   );
-  // } catch (e) {
-  //   log(e.toString());
-  //   categoriesState.value = UiState.error;
-  //   return;
-  // }
-
-  //   categoriesState.value = UiState.success;
-  // }
 
   Stream<List<CategoryModel>> streamCategoriesList({String? categoryId}) {
     return _firestoreService.streamCategoriesList().map((event) {
