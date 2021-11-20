@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 
 import '../../data/models/models.dart';
 import '../../data/services/services.dart';
+import '../../routes/app_pages.dart';
 
 class ProductListController extends GetxController {
   final FirestoreService _firestoreService = Get.find<FirestoreService>();
@@ -30,5 +31,13 @@ class ProductListController extends GetxController {
       }
       return _products;
     });
+  }
+
+  Future<void> onTapProduct(ProductModel product) async {
+    await Get.toNamed(
+      Routes.PRODUCT_DETAILS,
+      parameters: {'id': product.id},
+      arguments: product,
+    );
   }
 }

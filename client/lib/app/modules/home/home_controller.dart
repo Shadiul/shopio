@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import '../../widgets/bottom_nav_bar/bottom_nav_bar_controller.dart';
 import '../account/account_view.dart';
+import '../cart/cart_view.dart';
 import '../explore/explore_view.dart';
 
 class HomeController extends GetxController {
@@ -31,7 +32,7 @@ class HomeController extends GetxController {
       case 0:
         return const ExploreView();
       case 1:
-        return Container();
+        return CartView();
       case 2:
         return Container();
       case 3:

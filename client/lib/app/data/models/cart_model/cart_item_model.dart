@@ -29,4 +29,8 @@ class CartItemModel {
       _totalPrice.value = product.priceAfterDiscount * quantity;
     }
   }
+
+  void remove() {
+    product.stockQuantity += quantity;
+  }
 }

@@ -1,5 +1,9 @@
 import 'package:get/get.dart';
 
+import 'package:client/app/modules/cart/cart_binding.dart';
+import 'package:client/app/modules/cart/cart_view.dart';
+import 'package:client/app/modules/product_details/product_details_binding.dart';
+import 'package:client/app/modules/product_details/product_details_view.dart';
 import 'package:client/app/modules/product_list/product_list_binding.dart';
 import 'package:client/app/modules/product_list/product_list_view.dart';
 
@@ -60,6 +64,16 @@ class AppPages {
       name: _Paths.PRODUCT_LIST,
       page: () => ProductListView(),
       binding: ProductListBinding(),
+    ),
+    GetPage(
+      name: _Paths.PRODUCT_DETAILS,
+      page: () => ProductDetailsView(),
+      binding: ProductDetailsBinding(),
+    ),
+    GetPage(
+      name: _Paths.CART,
+      page: () => CartView(),
+      binding: CartBinding(),
     ),
   ];
 }

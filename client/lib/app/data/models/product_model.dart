@@ -23,7 +23,7 @@ class ProductModel {
     this.images = const [],
   });
 
-  double get priceAfterDiscount => (price * discount) / 100;
+  double get priceAfterDiscount => price - ((price * discount) / 100);
   bool get isStockAvailable => stockQuantity > 1;
 
   factory ProductModel.fromJson(Map<String, dynamic> json) {

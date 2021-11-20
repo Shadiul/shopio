@@ -6,9 +6,11 @@ import 'package:get/get.dart';
 
 import '../../utils/log_colored.dart';
 import 'auth_service.dart';
+import 'cart_service.dart';
 import 'firestore_service.dart';
 
 export 'auth_service.dart';
+export 'cart_service.dart';
 export 'firestore_service.dart';
 
 Future<void> initServices() async {
@@ -22,6 +24,9 @@ Future<void> initServices() async {
   );
   await Get.putAsync(
     () => FirestoreService(_firebaseFirestore).init(),
+  );
+  await Get.putAsync(
+    () => CartService().init(),
   );
   logColored('✔️ All Service Started', color: LogColor.white);
 }
