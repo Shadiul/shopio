@@ -10,8 +10,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      defaultTransition: Transition.cupertino,
-      title: "Shopio",
+      title: "Shopio Admin Panel",
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
       theme: ThemeData.light().copyWith(
