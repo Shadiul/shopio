@@ -32,7 +32,7 @@ class HomeController extends GetxController {
       case 0:
         return const ExploreView();
       case 1:
-        return CartView();
+        return const CartView();
       case 2:
         return Container();
       case 3:
