@@ -5,7 +5,7 @@ class AppService extends GetxService {
     return this;
   }
 
-  final RxInt _selectedSidebarMenuIndex = RxInt(0);
+  final RxInt _selectedSidebarMenuIndex = RxInt(1);
   int get selectedSidebarMenuIndex => _selectedSidebarMenuIndex.value;
   set selectedSidebarMenuIndex(int value) {
     if (value >= 0) {

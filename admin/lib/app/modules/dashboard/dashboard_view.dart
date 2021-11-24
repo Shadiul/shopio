@@ -9,10 +9,17 @@ class DashboardView extends GetView<DashboardController> {
     Get.put(DashboardController());
     Size _size = MediaQuery.of(context).size;
 
-    return Center(
-      child: Text(
-        'DashboardView is working',
-        style: TextStyle(fontSize: 20),
+    return Container(
+      child: GridView.builder(
+        padding: EdgeInsets.all(16.0),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          mainAxisSpacing: 16.0,
+          crossAxisSpacing: 16.0,
+          childAspectRatio: 16 / 9,
+        ),
+        itemCount: 10,
+        itemBuilder: (context, index) => Card(),
       ),
     );
   }

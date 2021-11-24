@@ -1,5 +1,8 @@
 import 'package:get/get.dart';
 
+import 'package:admin/app/modules/category_manager/category_manager_binding.dart';
+import 'package:admin/app/modules/category_manager/category_manager_view.dart';
+
 import '../modules/dashboard/dashboard_binding.dart';
 import '../modules/dashboard/dashboard_view.dart';
 import '../modules/home/home_binding.dart';
@@ -31,6 +34,11 @@ class AppPages {
       name: _Paths.NOT_FOUND,
       page: () => NotFoundView(),
       binding: NotFoundBinding(),
+    ),
+    GetPage(
+      name: _Paths.CATEGORY_MANAGER,
+      page: () => CategoryManagerView(),
+      binding: CategoryManagerBinding(),
     ),
   ];
 }
