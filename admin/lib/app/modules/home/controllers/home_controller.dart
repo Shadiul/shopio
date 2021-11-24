@@ -1,3 +1,9 @@
 import 'package:get/get.dart';
 
-class HomeController extends GetxController {}
+import '../../../data/services/services.dart';
+
+class HomeController extends GetxController {
+  final AppService _appService = Get.find<AppService>();
+
+  int get selectedIndex => _appService.selectedSidebarMenuIndex;
+}

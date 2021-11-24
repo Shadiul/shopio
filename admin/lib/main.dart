@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'app/app.dart';
+import 'app/data/services/services.dart';
 
-void main() {
+Future<void> main() async {
+  await initServices();
   runApp(App());
 }
