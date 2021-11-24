@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../sidebar_menu/sidebar_menu_view.dart';
-import '../controllers/dashboard_controller.dart';
+import '../sidebar_menu/sidebar_menu_view.dart';
+import 'dashboard_controller.dart';
 
 class DashboardView extends GetView<DashboardController> {
   @override

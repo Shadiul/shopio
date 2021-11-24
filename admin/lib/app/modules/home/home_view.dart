@@ -1,9 +1,10 @@
+import 'package:admin/app/modules/not_found/not_found_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../dashboard/views/dashboard_view.dart';
-import '../../sidebar_menu/sidebar_menu_view.dart';
-import '../controllers/home_controller.dart';
+import '../dashboard/dashboard_view.dart';
+import '../sidebar_menu/sidebar_menu_view.dart';
+import 'home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
   @override
@@ -29,19 +30,9 @@ class HomeView extends GetView<HomeController> {
     switch (index) {
       case 0:
         return DashboardView();
-      case 1:
-        return Container(
-          child: Center(
-            child: Text(index.toString()),
-          ),
-        );
 
       default:
-        return Container(
-          child: Center(
-            child: Text(index.toString()),
-          ),
-        );
+        return NotFoundView();
     }
   }
 }

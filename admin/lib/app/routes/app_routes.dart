@@ -8,9 +8,11 @@ abstract class Routes {
 
   static const HOME = _Paths.HOME;
   static const DASHBOARD = _Paths.DASHBOARD;
+  static const NOT_FOUND = _Paths.NOT_FOUND;
 }
 
 abstract class _Paths {
   static const HOME = '/home';
   static const DASHBOARD = '/dashboard';
+  static const NOT_FOUND = '/not-found';
 }

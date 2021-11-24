@@ -18,30 +18,32 @@ class SidebarMenuView extends GetView<SidebarMenuController> {
             accountName: Text('Admin'),
             accountEmail: Text('Admin@email.com'),
           ),
-          Expanded(
-            child: ListView(
-              children: [
-                ListTile(
-                  onTap: () => controller.selectedIndex = 0,
-                  selected: controller.selectedIndex == 0,
-                  leading: Icon(Icons.dashboard),
-                  title: Text('Dasshboard'),
-                ),
-                ListTile(
-                  onTap: () => controller.selectedIndex = 1,
-                  selected: controller.selectedIndex == 1,
-                  leading: Icon(Icons.ac_unit),
-                  title: Text('Menu Item 2'),
-                ),
-                ListTile(
-                  onTap: () => controller.selectedIndex = 2,
-                  selected: controller.selectedIndex == 2,
-                  leading: Icon(Icons.ac_unit),
-                  title: Text('Menu Item 3'),
-                ),
-              ],
+          Obx(
+            () => Expanded(
+              child: ListView(
+                children: [
+                  ListTile(
+                    onTap: () => controller.selectedIndex = 0,
+                    selected: controller.selectedIndex == 0,
+                    leading: Icon(Icons.dashboard),
+                    title: Text('Dasshboard'),
+                  ),
+                  ListTile(
+                    onTap: () => controller.selectedIndex = 1,
+                    selected: controller.selectedIndex == 1,
+                    leading: Icon(Icons.category),
+                    title: Text('Manage Categories'),
+                  ),
+                  ListTile(
+                    onTap: () => controller.selectedIndex = 2,
+                    selected: controller.selectedIndex == 2,
+                    leading: Icon(Icons.shopping_bag),
+                    title: Text('Manage Products'),
+                  ),
+                ],
+              ),
             ),
-          ),
+          )
         ],
       ),
     );
