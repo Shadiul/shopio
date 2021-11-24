@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../utils/ui_utility.dart';
 import '../sidebar_menu/sidebar_menu_view.dart';
 import 'not_found_controller.dart';
 
 class NotFoundView extends GetView<NotFoundController> {
+  final bool showAppBar;
+
+  NotFoundView({
+    this.showAppBar = false,
+  });
+
   @override
   Widget build(BuildContext context) {
     Get.put(NotFoundController());
@@ -15,8 +22,8 @@ class NotFoundView extends GetView<NotFoundController> {
     TextTheme _textTheme = _themeData.textTheme;
 
     return Scaffold(
-      appBar: AppBar(),
-      drawer: _size.width <= 1000 ? SidebarMenuView() : null,
+      appBar: showAppBar ? AppBar() : null,
+      drawer: _size.width <= smallBreakpoint ? SidebarMenuView() : null,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -24,12 +31,12 @@ class NotFoundView extends GetView<NotFoundController> {
           Text(
             '404',
             textAlign: TextAlign.center,
-            style: _textTheme.headline1,
+            style: _textTheme.headline2,
           ),
           Text(
             'Page not found',
             textAlign: TextAlign.center,
-            style: _textTheme.headline3,
+            style: _textTheme.headline4,
           ),
         ],
       ),
