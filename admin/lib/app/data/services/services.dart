@@ -3,9 +3,11 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 import 'app_service.dart';
+import 'firebase_storage_service.dart';
 import 'firestore_service.dart';
 
 export 'app_service.dart';
+export 'firebase_storage_service.dart';
 export 'firestore_service.dart';
 
 Future<void> initServices() async {
@@ -13,6 +15,7 @@ Future<void> initServices() async {
   await Firebase.initializeApp();
 
   await Get.putAsync(() => FirestoreService().init());
+  await Get.putAsync(() => FirebaseStorageService().init());
 
   await Get.putAsync(() => AppService().init());
 }

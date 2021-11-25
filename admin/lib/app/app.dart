@@ -14,6 +14,7 @@ class App extends StatelessWidget {
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
       theme: ThemeData.light().copyWith(
+        visualDensity: VisualDensity.standard,
         colorScheme: ColorScheme.light(
           primary: Colors.deepPurple,
           primaryVariant: Colors.deepPurple.shade700,
@@ -36,29 +37,29 @@ class App extends StatelessWidget {
           ),
         ),
         inputDecorationTheme: InputDecorationTheme(
-          contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
-          border: OutlineInputBorder(
-            borderSide: BorderSide.none,
-          ),
-          filled: true,
-          fillColor: Colors.white,
-          floatingLabelBehavior: FloatingLabelBehavior.never,
-        ),
+            // contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
+            // border: OutlineInputBorder(
+            //   borderSide: BorderSide.none,
+            // ),
+            // filled: true,
+            // fillColor: Colors.white,
+            // floatingLabelBehavior: FloatingLabelBehavior.never,
+            ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ButtonStyle(
-            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            padding: MaterialStateProperty.all(
-              const EdgeInsets.all(24.0),
-            ),
-          ),
+              // tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              // padding: MaterialStateProperty.all(
+              //   const EdgeInsets.all(24.0),
+              // ),
+              ),
         ),
         textButtonTheme: TextButtonThemeData(
           style: ButtonStyle(
-            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            padding: MaterialStateProperty.all(
-              const EdgeInsets.all(16.0),
-            ),
-          ),
+              // tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              // padding: MaterialStateProperty.all(
+              //   const EdgeInsets.all(16.0),
+              // ),
+              ),
         ),
         cardTheme: CardTheme(
           margin: EdgeInsets.zero,

@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../data/enums.dart';
-import '../catagory_form_view.dart/category_form_controller.dart';
-import '../catagory_form_view.dart/category_form_view.dart';
 import 'category_data_source.dart';
 import 'category_list_controller.dart';
 
@@ -17,6 +15,8 @@ class CategoryListView extends GetView<CategoryListController> {
     // ThemeData _themeData = Theme.of(context);
     // TextTheme _textTheme = _themeData.textTheme;
 
+    CategoryDataSource dataSource = CategoryDataSource(context);
+
     return Obx(
       () => controller.uiState == UiState.loading
           ? Card(
@@ -28,10 +28,12 @@ class CategoryListView extends GetView<CategoryListController> {
               ),
             )
           : PaginatedDataTable(
+              key: ObjectKey(controller.categories),
               sortColumnIndex: controller.sortColumnIndex.value,
               sortAscending: controller.sortAscending.value,
               showFirstLastButtons: true,
               header: Text('Categories'),
+              columnSpacing: 24.0,
               actions: [
                 IconButton(
                   onPressed: () {},
@@ -39,31 +41,30 @@ class CategoryListView extends GetView<CategoryListController> {
                 ),
                 IconButton(
                   onPressed: () async {
-                    Get.replace(CategoryFormController());
-                    await showDialog(
-                      context: context,
-                      barrierDismissible: false,
-                      builder: (context) => CategoryFormView(),
-                    );
+                    await dataSource.addRow(0);
                   },
                   icon: Icon(Icons.add),
                 ),
               ],
               columns: [
                 DataColumn(label: Text('Index')),
+                DataColumn(label: Text('Icon')),
                 DataColumn(label: Text('ID')),
                 DataColumn(
+                  label: Text('Timestamp'),
+                ),
+                DataColumn(
                   label: Text('Name'),
-                  onSort: controller.sortByName,
+                  onSort: dataSource.sortByName,
                 ),
                 DataColumn(
                   label: Text('Products Count'),
                   numeric: true,
-                  onSort: controller.sortByProductCount,
+                  onSort: dataSource.sortByProductCount,
                 ),
                 DataColumn(label: Text('Menu'), numeric: true),
               ],
-              source: CategoryDataSource(context),
+              source: dataSource,
             ),
     );
   }

@@ -11,8 +11,8 @@ class CategoryManagerView extends GetView<CategoryManagerController> {
 
     // Size _size = MediaQuery.of(context).size;
 
-    ThemeData _themeData = Theme.of(context);
-    TextTheme _textTheme = _themeData.textTheme;
+    // ThemeData _themeData = Theme.of(context);
+    // TextTheme _textTheme = _themeData.textTheme;
 
     return Scaffold(
       body: ListView(
