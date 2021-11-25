@@ -19,6 +19,7 @@ class App extends StatelessWidget {
           primaryVariant: Colors.deepPurple.shade700,
           secondary: Colors.deepPurpleAccent,
           secondaryVariant: Colors.deepPurpleAccent.shade700,
+          onSecondary: Colors.white,
         ),
         primaryColorLight: Colors.deepPurple.shade300,
         primaryColor: Colors.deepPurple,
@@ -37,7 +38,6 @@ class App extends StatelessWidget {
         inputDecorationTheme: InputDecorationTheme(
           contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(32.0),
             borderSide: BorderSide.none,
           ),
           filled: true,
@@ -48,18 +48,20 @@ class App extends StatelessWidget {
           style: ButtonStyle(
             tapTargetSize: MaterialTapTargetSize.shrinkWrap,
             padding: MaterialStateProperty.all(
-              const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
+              const EdgeInsets.all(24.0),
             ),
-            shape: MaterialStateProperty.all(
-              const StadiumBorder(),
+          ),
+        ),
+        textButtonTheme: TextButtonThemeData(
+          style: ButtonStyle(
+            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            padding: MaterialStateProperty.all(
+              const EdgeInsets.all(16.0),
             ),
           ),
         ),
         cardTheme: CardTheme(
           margin: EdgeInsets.zero,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12.0),
-          ),
         ),
         dividerTheme: const DividerThemeData(space: 0.0),
       ),

@@ -7,7 +7,7 @@ class DashboardView extends GetView<DashboardController> {
   @override
   Widget build(BuildContext context) {
     Get.put(DashboardController());
-    Size _size = MediaQuery.of(context).size;
+    // Size _size = MediaQuery.of(context).size;
 
     return Container(
       child: GridView.builder(
