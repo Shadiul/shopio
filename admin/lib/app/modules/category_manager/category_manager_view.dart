@@ -60,25 +60,6 @@ class CategoryManagerView extends GetView<CategoryManagerController> {
             ],
           ),
           SizedBox(height: 16.0),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Expanded(
-                child: TextField(
-                  decoration: InputDecoration(
-                    hintText: 'Filter',
-                  ),
-                ),
-              ),
-              SizedBox(width: 16.0),
-              ElevatedButton(
-                onPressed: () {},
-                child: Text('Apply Filter'),
-              ),
-              SizedBox(width: 16.0),
-            ],
-          ),
-          SizedBox(height: 16.0),
           CategoryListView(),
         ],
       ),

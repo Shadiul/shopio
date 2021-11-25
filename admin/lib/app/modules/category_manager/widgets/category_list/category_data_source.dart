@@ -4,16 +4,20 @@ import '../../../../data/models/category_model.dart';
 
 class CategoryDataSource extends DataTableSource {
   final List<CategoryModel> categories;
-  final BuildContext context;
+  final Function(int index)? onDelete;
+  // final BuildContext context;
 
-  CategoryDataSource(this.context, this.categories);
+  CategoryDataSource({
+    this.onDelete,
+    this.categories = const [],
+  });
   @override
   DataRow? getRow(int index) {
     return DataRow.byIndex(
       index: index,
-      color: index % 2 == 0
-          ? MaterialStateProperty.all(Theme.of(context).highlightColor)
-          : null,
+      // color: index % 2 == 0
+      //     ? MaterialStateProperty.all(Theme.of(context).highlightColor)
+      //     : null,
       cells: [
         DataCell(Text((index + 1).toString())),
         DataCell(Text(categories[index].id)),
@@ -27,7 +31,16 @@ class CategoryDataSource extends DataTableSource {
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Icon(Icons.more_vert),
+              IconButton(onPressed: () {}, icon: Icon(Icons.edit)),
+              IconButton(
+                onPressed: onDelete == null
+                    ? null
+                    : () {
+                        onDelete!(index);
+                      },
+                icon: Icon(Icons.delete),
+                color: Colors.redAccent.shade200,
+              ),
             ],
           ),
         ),
