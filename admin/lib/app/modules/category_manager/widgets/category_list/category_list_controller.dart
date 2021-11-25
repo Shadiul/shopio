@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import '../../../../data/enums.dart';
 import '../../../../data/models/models.dart';
 import '../../../../data/services/services.dart';
-import 'category_data_source.dart';
 
 class CategoryListController extends GetxController {
   final FirestoreService _firestoreService = Get.find<FirestoreService>();
@@ -11,31 +10,23 @@ class CategoryListController extends GetxController {
   @override
   void onInit() {
     _uiState.value = UiState.loading;
-    // categories.bindStream(stramCategories());
-    dataSource.bindStream(stramCategories());
+    categories.bindStream(stramCategories());
     super.onInit();
   }
-
-  Rx<CategoryDataSource> dataSource = Rx<CategoryDataSource>(
-    CategoryDataSource(),
-  );
 
   final Rx<UiState> _uiState = Rx<UiState>(UiState.idle);
   UiState get uiState => _uiState.value;
 
   RxList<CategoryModel> categories = RxList<CategoryModel>();
 
-  Stream<CategoryDataSource> stramCategories() {
+  Stream<List<CategoryModel>> stramCategories() {
     return _firestoreService.streamCategoriesList().map((event) {
       _uiState.value = UiState.success;
       List<CategoryModel> _categories = [];
       for (var element in event.docs) {
         _categories.add(CategoryModel.fromJson(element.data()));
       }
-      return CategoryDataSource(
-        categories: _categories,
-        onDelete: deleteItem,
-      );
+      return _categories;
     });
   }
 
@@ -69,7 +60,11 @@ class CategoryListController extends GetxController {
   }
 
   Future<void> deleteItem(index) async {
-    // categories.removeAt(index);
-    dataSource.value.categories.removeAt(index);
+    CategoryModel category = categories[index];
+    categories.removeAt(index);
+    final response = await _firestoreService.deleteCategory(category.id);
+    if (response.status == ResponseStatus.error) {
+      categories.insert(index, category);
+    }
   }
 }

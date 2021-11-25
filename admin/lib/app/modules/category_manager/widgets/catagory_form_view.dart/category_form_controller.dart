@@ -6,7 +6,7 @@ import '../../../../data/enums.dart';
 import '../../../../data/models/models.dart';
 import '../../../../data/services/services.dart';
 
-class NewCategoryFormController extends GetxController {
+class CategoryFormController extends GetxController {
   final FirestoreService _firestoreService = Get.find<FirestoreService>();
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();

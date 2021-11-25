@@ -37,6 +37,21 @@ class FirestoreService extends GetxService {
     }
   }
 
+  Future<ResponseModel> deleteCategory(String id) async {
+    try {
+      await _firestore.collection('categories').doc(id).delete();
+      return ResponseModel(
+        status: ResponseStatus.success,
+        message: 'Delete category success',
+      );
+    } catch (e) {
+      return ResponseModel(
+        status: ResponseStatus.error,
+        message: e.toString(),
+      );
+    }
+  }
+
   Stream<QuerySnapshot<Map<String, dynamic>>> streamProducts(
       {String? categoryId}) {
     if (categoryId != null) {

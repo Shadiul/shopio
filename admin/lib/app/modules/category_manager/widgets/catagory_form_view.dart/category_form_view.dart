@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'new_category_form_controller.dart';
+import 'category_form_controller.dart';
 
-class NewCategoryFormView extends GetWidget<NewCategoryFormController> {
-  const NewCategoryFormView({Key? key}) : super(key: key);
+class CategoryFormView extends GetWidget<CategoryFormController> {
+  const CategoryFormView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

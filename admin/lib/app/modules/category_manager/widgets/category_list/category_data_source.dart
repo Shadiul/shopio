@@ -1,30 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-import '../../../../data/models/category_model.dart';
+import 'category_list_controller.dart';
 
 class CategoryDataSource extends DataTableSource {
-  final List<CategoryModel> categories;
-  final Function(int index)? onDelete;
-  // final BuildContext context;
+  final BuildContext context;
 
-  CategoryDataSource({
-    this.onDelete,
-    this.categories = const [],
-  });
+  CategoryDataSource(this.context);
+
+  final CategoryListController controller = Get.find<CategoryListController>();
+
   @override
   DataRow? getRow(int index) {
     return DataRow.byIndex(
       index: index,
-      // color: index % 2 == 0
-      //     ? MaterialStateProperty.all(Theme.of(context).highlightColor)
-      //     : null,
+      color: index % 2 == 0
+          ? MaterialStateProperty.all(Theme.of(context).highlightColor)
+          : null,
       cells: [
         DataCell(Text((index + 1).toString())),
-        DataCell(Text(categories[index].id)),
-        DataCell(Text(categories[index].name)),
+        DataCell(Text(controller.categories[index].id)),
+        DataCell(Text(controller.categories[index].name)),
         DataCell(
           Text(
-            categories[index].productsCount.toString(),
+            controller.categories[index].productsCount.toString(),
           ),
         ),
         DataCell(
@@ -33,11 +32,10 @@ class CategoryDataSource extends DataTableSource {
             children: [
               IconButton(onPressed: () {}, icon: Icon(Icons.edit)),
               IconButton(
-                onPressed: onDelete == null
-                    ? null
-                    : () {
-                        onDelete!(index);
-                      },
+                onPressed: () {
+                  controller.deleteItem(index);
+                  notifyListeners();
+                },
                 icon: Icon(Icons.delete),
                 color: Colors.redAccent.shade200,
               ),
@@ -52,7 +50,7 @@ class CategoryDataSource extends DataTableSource {
   bool get isRowCountApproximate => false;
 
   @override
-  int get rowCount => categories.length;
+  int get rowCount => controller.categories.length;
 
   @override
   int get selectedRowCount => 0;

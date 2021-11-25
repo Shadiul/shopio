@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../data/enums.dart';
-import '../new_catagory_form_view.dart/new_category_form_controller.dart';
-import '../new_catagory_form_view.dart/new_category_form_view.dart';
+import '../catagory_form_view.dart/category_form_controller.dart';
+import '../catagory_form_view.dart/category_form_view.dart';
+import 'category_data_source.dart';
 import 'category_list_controller.dart';
 
 class CategoryListView extends GetView<CategoryListController> {
@@ -38,11 +39,11 @@ class CategoryListView extends GetView<CategoryListController> {
                 ),
                 IconButton(
                   onPressed: () async {
-                    Get.put(NewCategoryFormController());
+                    Get.replace(CategoryFormController());
                     await showDialog(
                       context: context,
                       barrierDismissible: false,
-                      builder: (context) => NewCategoryFormView(),
+                      builder: (context) => CategoryFormView(),
                     );
                   },
                   icon: Icon(Icons.add),
@@ -62,7 +63,7 @@ class CategoryListView extends GetView<CategoryListController> {
                 ),
                 DataColumn(label: Text('Menu'), numeric: true),
               ],
-              source: controller.dataSource.value,
+              source: CategoryDataSource(context),
             ),
     );
   }
