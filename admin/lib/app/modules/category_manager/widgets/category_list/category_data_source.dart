@@ -65,20 +65,7 @@ class CategoryDataSource extends DataTableSource {
           ),
         ),
         DataCell(
-          TextFormField(
-            key: Key(controller.categories[index].id),
-            initialValue: controller.categories[index].name,
-            maxLength: 30,
-            keyboardType: TextInputType.text,
-            onFieldSubmitted: (value) async {
-              await controller.updateName(index, value);
-            },
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              counterText: '',
-            ),
-          ),
-          showEditIcon: true,
+          Text(controller.categories[index].name),
         ),
         DataCell(
           Text(
@@ -89,6 +76,13 @@ class CategoryDataSource extends DataTableSource {
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
+              IconButton(
+                onPressed: () async {
+                  await controller.onTapEditCategory(index);
+                  notifyListeners();
+                },
+                icon: Icon(Icons.edit),
+              ),
               IconButton(
                 onPressed: () async {
                   await controller.deleteItem(index);
@@ -105,7 +99,21 @@ class CategoryDataSource extends DataTableSource {
   }
 
   Future<void> addRow(int index) async {
-    await controller.addCategory();
+    await controller.onTapAddCategory();
+    notifyListeners();
+  }
+
+  void sortByTimestamp(columnIndex, ascending) {
+    controller.sortColumnIndex.value = columnIndex;
+    controller.sortAscending.value = ascending;
+    controller.categories.sort(
+      (a, b) => b.timestamp.compareTo(
+        a.timestamp,
+      ),
+    );
+    if (!ascending) {
+      controller.categories.value = controller.categories.reversed.toList();
+    }
     notifyListeners();
   }
 

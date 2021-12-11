@@ -52,6 +52,7 @@ class CategoryListView extends GetView<CategoryListController> {
                 DataColumn(label: Text('ID')),
                 DataColumn(
                   label: Text('Timestamp'),
+                  onSort: dataSource.sortByTimestamp,
                 ),
                 DataColumn(
                   label: Text('Name'),

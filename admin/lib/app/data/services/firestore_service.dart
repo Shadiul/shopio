@@ -7,6 +7,7 @@ import '../enums.dart';
 import '../models/models.dart';
 
 const _collectionCategories = 'categories';
+const _collectionProducts = 'products';
 
 class FirestoreService extends GetxService {
   Future<FirestoreService> init() async {
@@ -15,6 +16,13 @@ class FirestoreService extends GetxService {
 
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
+  Stream<QuerySnapshot<Map<String, dynamic>>> streamProductsList() {
+    return _firestore
+        .collection(_collectionProducts)
+        // .orderBy('timestamp', descending: true)
+        .snapshots();
+  }
+
   Stream<QuerySnapshot<Map<String, dynamic>>> streamCategoriesList() {
     return _firestore
         .collection(_collectionCategories)
@@ -22,15 +30,19 @@ class FirestoreService extends GetxService {
         .snapshots();
   }
 
-  Future<ResponseModel> createCategory() async {
+  Future<ResponseModel> createCategory({
+    required String name,
+    int productsCount = 0,
+  }) async {
     try {
       final doc = await _firestore.collection(_collectionCategories).add(
             CategoryModel(
               id: '',
               timestamp: Timestamp.now(),
-              name: 'No Name',
+              name: name,
               icon:
                   'https://firebasestorage.googleapis.com/v0/b/shopio-031.appspot.com/o/icons%2Fcategory_icons%2Fcategory_default.png?alt=media&token=11f15310-58df-4ccb-a6d5-a447ce92acf9',
+              productsCount: productsCount,
             ).toJson(),
           );
       await doc.update({'id': doc.id});
@@ -62,15 +74,22 @@ class FirestoreService extends GetxService {
     }
   }
 
-  Future<ResponseModel> updateCategoryName(String id, String value) async {
+  Future<ResponseModel> updateCategory({
+    required String id,
+    required String name,
+    int productsCount = 0,
+  }) async {
     try {
       await _firestore.collection(_collectionCategories).doc(id).update(
-        {'name': value},
+        {
+          'name': name,
+          'products_count': productsCount,
+        },
       );
 
       return ResponseModel(
         status: ResponseStatus.success,
-        message: 'Success updating name',
+        message: 'Success updating category',
       );
     } catch (e) {
       return ResponseModel(status: ResponseStatus.error, message: e.toString());

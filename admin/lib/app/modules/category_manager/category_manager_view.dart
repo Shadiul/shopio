@@ -18,48 +18,6 @@ class CategoryManagerView extends GetView<CategoryManagerController> {
       body: ListView(
         padding: EdgeInsets.all(16.0),
         children: [
-          // Wrap(
-          //   spacing: 16.0,
-          //   children: [
-          //     Card(
-          //       child: Padding(
-          //         padding: const EdgeInsets.all(16.0),
-          //         child: Column(
-          //           crossAxisAlignment: CrossAxisAlignment.start,
-          //           children: [
-          //             Text(
-          //               'Total Categories',
-          //               style: _textTheme.headline6,
-          //             ),
-          //             Text(
-          //               '100',
-          //               style: _textTheme.headline5,
-          //             ),
-          //           ],
-          //         ),
-          //       ),
-          //     ),
-          //     Card(
-          //       child: Padding(
-          //         padding: const EdgeInsets.all(16.0),
-          //         child: Column(
-          //           crossAxisAlignment: CrossAxisAlignment.start,
-          //           children: [
-          //             Text(
-          //               'Total Categories',
-          //               style: _textTheme.headline6,
-          //             ),
-          //             Text(
-          //               '100',
-          //               style: _textTheme.headline5,
-          //             ),
-          //           ],
-          //         ),
-          //       ),
-          //     ),
-          //   ],
-          // ),
-          SizedBox(height: 16.0),
           CategoryListView(),
         ],
       ),

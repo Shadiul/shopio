@@ -1,3 +1,4 @@
+import 'package:admin/app/modules/product_manager/product_manager_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -27,8 +28,10 @@ class HomeView extends GetView<HomeController> {
           if (_size.width > smallBreakpoint) SidebarMenuView(),
           if (_size.width > smallBreakpoint) Divider(),
           Expanded(
-            child: Obx(
-              () => getViewForSidebarIndex(controller.selectedIndex),
+            child: SafeArea(
+              child: Obx(
+                () => getViewForSidebarIndex(controller.selectedIndex),
+              ),
             ),
           ),
         ],
@@ -42,6 +45,8 @@ class HomeView extends GetView<HomeController> {
         return Text('Dashboard');
       case 1:
         return Text('Category Manager');
+      case 2:
+        return Text('Product Manager');
 
       default:
         return Container();
@@ -54,6 +59,8 @@ class HomeView extends GetView<HomeController> {
         return DashboardView();
       case 1:
         return CategoryManagerView();
+      case 2:
+        return ProductManagerView();
 
       default:
         return NotFoundView();

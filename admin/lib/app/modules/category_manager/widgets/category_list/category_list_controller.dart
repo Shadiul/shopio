@@ -1,3 +1,4 @@
+import 'package:admin/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 
 import '../../../../data/enums.dart';
@@ -43,26 +44,16 @@ class CategoryListController extends GetxController {
     });
   }
 
+  Future<void> onTapAddCategory() async {
+    await Get.toNamed(Routes.CATEGORY_EDITOR);
+  }
+
+  Future<void> onTapEditCategory(int index) async {
+    await Get.toNamed(Routes.CATEGORY_EDITOR, arguments: categories[index]);
+  }
+
   RxInt sortColumnIndex = RxInt(0);
   RxBool sortAscending = RxBool(false);
-
-  Future<void> addCategory() async {
-    final response = await _firestoreService.createCategory();
-    if (response.status == ResponseStatus.error) {
-      Get.snackbar('error', response.message);
-    } else {}
-  }
-
-  Future<void> updateName(index, String value) async {
-    CategoryModel category = categories[index];
-    final response = await _firestoreService.updateCategoryName(
-      category.id,
-      value,
-    );
-    if (response.status == ResponseStatus.error) {
-      Get.snackbar('error', response.message);
-    }
-  }
 
   Future<void> updateIcon(index, String value) async {
     CategoryModel category = categories[index];
