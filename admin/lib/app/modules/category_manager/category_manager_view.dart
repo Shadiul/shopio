@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'category_manager_controller.dart';
-import 'widgets/category_list/category_list_view.dart';
+import 'widgets/category_data_table/category_data_table_view.dart';
 
 class CategoryManagerView extends GetView<CategoryManagerController> {
   @override
@@ -18,7 +18,7 @@ class CategoryManagerView extends GetView<CategoryManagerController> {
       body: ListView(
         padding: EdgeInsets.all(16.0),
         children: [
-          CategoryListView(),
+          CategoryDataTableView(),
         ],
       ),
     );

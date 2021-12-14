@@ -3,14 +3,14 @@ import 'package:get/get.dart';
 
 import '../../../../data/enums.dart';
 import 'category_data_source.dart';
-import 'category_list_controller.dart';
+import 'category_data_table_controller.dart';
 
-class CategoryListView extends GetView<CategoryListController> {
-  const CategoryListView({Key? key}) : super(key: key);
+class CategoryDataTableView extends GetView<CategoryDataTableController> {
+  const CategoryDataTableView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Get.put(CategoryListController());
+    Get.put(CategoryDataTableController());
 
     // ThemeData _themeData = Theme.of(context);
     // TextTheme _textTheme = _themeData.textTheme;
@@ -48,7 +48,6 @@ class CategoryListView extends GetView<CategoryListController> {
               ],
               columns: [
                 DataColumn(label: Text('Index')),
-                DataColumn(label: Text('Icon')),
                 DataColumn(label: Text('ID')),
                 DataColumn(
                   label: Text('Timestamp'),

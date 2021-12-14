@@ -8,6 +8,7 @@ import '../models/models.dart';
 
 const _collectionCategories = 'categories';
 const _collectionProducts = 'products';
+const _collectionIcons = 'icons';
 
 class FirestoreService extends GetxService {
   Future<FirestoreService> init() async {
@@ -32,6 +33,7 @@ class FirestoreService extends GetxService {
 
   Future<ResponseModel> createCategory({
     required String name,
+    required String icon,
     int productsCount = 0,
   }) async {
     try {
@@ -40,8 +42,7 @@ class FirestoreService extends GetxService {
               id: '',
               timestamp: Timestamp.now(),
               name: name,
-              icon:
-                  'https://firebasestorage.googleapis.com/v0/b/shopio-031.appspot.com/o/icons%2Fcategory_icons%2Fcategory_default.png?alt=media&token=11f15310-58df-4ccb-a6d5-a447ce92acf9',
+              icon: icon,
               productsCount: productsCount,
             ).toJson(),
           );
@@ -77,6 +78,7 @@ class FirestoreService extends GetxService {
   Future<ResponseModel> updateCategory({
     required String id,
     required String name,
+    required String icon,
     int productsCount = 0,
   }) async {
     try {
@@ -84,6 +86,7 @@ class FirestoreService extends GetxService {
         {
           'name': name,
           'products_count': productsCount,
+          'icon': icon,
         },
       );
 
@@ -124,5 +127,34 @@ class FirestoreService extends GetxService {
           .snapshots();
     }
     return _firestore.collection('products').snapshots();
+  }
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> streamIconsList() {
+    return _firestore
+        .collection(_collectionIcons)
+        .orderBy('timestamp', descending: true)
+        .snapshots();
+  }
+
+  Future<ResponseModel> getCategoryIcons() async {
+    try {
+      final doc = await _firestore
+          .collection(_collectionIcons)
+          .doc('category_icons')
+          .get();
+
+      List<String> icons = List<String>.from(doc.data()!['icons']).toList();
+
+      return ResponseModel(
+        status: ResponseStatus.success,
+        message: 'Success fetching category icons',
+        data: icons,
+      );
+    } catch (e) {
+      return ResponseModel(
+        status: ResponseStatus.error,
+        message: e.toString(),
+      );
+    }
   }
 }

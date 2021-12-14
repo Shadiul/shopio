@@ -1,20 +1,16 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-import '../../../../data/services/services.dart';
-import '../icon_picker.dart';
-import 'category_list_controller.dart';
+import 'category_data_table_controller.dart';
 
 class CategoryDataSource extends DataTableSource {
   final BuildContext context;
 
   CategoryDataSource(this.context);
 
-  final CategoryListController controller = Get.find<CategoryListController>();
-  final FirebaseStorageService _firebaseStorageService =
-      Get.find<FirebaseStorageService>();
+  final CategoryDataTableController controller =
+      Get.find<CategoryDataTableController>();
 
   @override
   DataRow? getRow(int index) {
@@ -26,40 +22,20 @@ class CategoryDataSource extends DataTableSource {
       cells: [
         DataCell(Text((index + 1).toString())),
         DataCell(
-          FutureBuilder<String>(
-            future: _firebaseStorageService
-                .getDownloadUrl(controller.categories[index].icon),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return CachedNetworkImage(
-                  imageUrl: snapshot.data!,
-                  cacheKey: controller.categories[index].icon,
-                  color: Theme.of(context).colorScheme.primary,
-                  height: 48.0,
-                  width: 48.0,
-                );
-              }
-              return CircularProgressIndicator();
-            },
+          Row(
+            children: [
+              Text(controller.categories[index].id),
+              Spacer(),
+              IconButton(
+                onPressed: () {},
+                icon: Icon(Icons.copy),
+              ),
+            ],
           ),
-          onTap: () async {
-            String? icon = await showDialog(
-              context: context,
-              builder: (context) {
-                return IconPicker();
-              },
-            );
-
-            if (icon != null) {
-              await controller.updateIcon(index, icon);
-              notifyListeners();
-            }
-          },
         ),
-        DataCell(Text(controller.categories[index].id)),
         DataCell(
           Text(
-            DateFormat('MMM dd, yyyy hh:mm:ss a').format(
+            DateFormat('MMM dd, yyyy hh:mm a').format(
               controller.categories[index].timestamp.toDate(),
             ),
           ),

@@ -1,11 +1,11 @@
-import 'package:admin/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 
 import '../../../../data/enums.dart';
 import '../../../../data/models/models.dart';
 import '../../../../data/services/services.dart';
+import '../../category_editor/category_editor_view.dart';
 
-class CategoryListController extends GetxController {
+class CategoryDataTableController extends GetxController {
   final FirestoreService _firestoreService = Get.find<FirestoreService>();
 
   @override
@@ -45,33 +45,20 @@ class CategoryListController extends GetxController {
   }
 
   Future<void> onTapAddCategory() async {
-    await Get.toNamed(Routes.CATEGORY_EDITOR);
+    await Get.dialog(
+      CategoryEditorView(),
+    );
   }
 
   Future<void> onTapEditCategory(int index) async {
-    await Get.toNamed(Routes.CATEGORY_EDITOR, arguments: categories[index]);
+    await Get.dialog(CategoryEditorView(), arguments: categories[index]);
   }
 
   RxInt sortColumnIndex = RxInt(0);
   RxBool sortAscending = RxBool(false);
 
-  Future<void> updateIcon(index, String value) async {
-    CategoryModel category = categories[index];
-    final response = await _firestoreService.updateCategoryIcon(
-      category.id,
-      value,
-    );
-    if (response.status == ResponseStatus.error) {
-      Get.snackbar('error', response.message);
-    }
-  }
-
   Future<void> deleteItem(index) async {
     CategoryModel category = categories[index];
-    // categories.removeAt(index);
-    final response = await _firestoreService.deleteCategory(category.id);
-    // if (response.status == ResponseStatus.error) {
-    //   categories.insert(index, category);
-    // }
+    await _firestoreService.deleteCategory(category.id);
   }
 }
