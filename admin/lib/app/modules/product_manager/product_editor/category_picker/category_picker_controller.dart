@@ -3,9 +3,8 @@ import 'package:get/get.dart';
 import '../../../../data/enums.dart';
 import '../../../../data/models/models.dart';
 import '../../../../data/services/services.dart';
-import '../../category_editor/category_editor_view.dart';
 
-class CategoryDataTableController extends GetxController {
+class CategoryPickerController extends GetxController {
   final FirestoreService _firestoreService = Get.find<FirestoreService>();
 
   @override
@@ -32,21 +31,7 @@ class CategoryDataTableController extends GetxController {
     });
   }
 
-  Future<void> onTapAddCategory() async {
-    await Get.dialog(
-      CategoryEditorView(),
-    );
-  }
-
-  Future<void> onTapEditCategory(int index) async {
-    await Get.dialog(CategoryEditorView(), arguments: categories[index]);
-  }
-
-  RxInt sortColumnIndex = RxInt(0);
-  RxBool sortAscending = RxBool(false);
-
-  Future<void> deleteItem(index) async {
-    CategoryModel category = categories[index];
-    await _firestoreService.deleteCategory(category.id);
+  Future<void> onTapCategory(CategoryModel category) async {
+    Get.back(result: category);
   }
 }

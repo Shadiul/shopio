@@ -2,20 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../data/enums.dart';
-import 'category_data_source.dart';
-import 'category_data_table_controller.dart';
+import 'products_data_source.dart';
+import 'products_data_table_controller.dart';
 
-class CategoryDataTableView extends GetView<CategoryDataTableController> {
-  const CategoryDataTableView({Key? key}) : super(key: key);
+class ProductsDataTableView extends GetView<ProductsDataTableController> {
+  const ProductsDataTableView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Get.put(CategoryDataTableController());
+    Get.put(ProductsDataTableController());
 
     // ThemeData _themeData = Theme.of(context);
     // TextTheme _textTheme = _themeData.textTheme;
+    // final size = MediaQuery.of(context).size;
 
-    CategoryDataSource dataSource = CategoryDataSource();
+    ProductsDataSource dataSource = ProductsDataSource();
 
     return Obx(
       () => controller.uiState == UiState.loading
@@ -28,11 +29,11 @@ class CategoryDataTableView extends GetView<CategoryDataTableController> {
               ),
             )
           : PaginatedDataTable(
-              key: ObjectKey(controller.categories),
+              key: ObjectKey(controller.products),
               sortColumnIndex: controller.sortColumnIndex.value,
               sortAscending: controller.sortAscending.value,
               showFirstLastButtons: true,
-              header: Text('Categories'),
+              header: Text('Products'),
               columnSpacing: 24.0,
               actions: [
                 IconButton(
@@ -53,17 +54,28 @@ class CategoryDataTableView extends GetView<CategoryDataTableController> {
                 ),
                 DataColumn(label: Text('ID')),
                 DataColumn(
-                  label: Text('Timestamp'),
-                  onSort: dataSource.sortByTimestamp,
-                ),
-                DataColumn(
                   label: Text('Name'),
                   onSort: dataSource.sortByName,
                 ),
                 DataColumn(
-                  label: Text('Products Count'),
+                  label: Text('Price'),
                   numeric: true,
-                  onSort: dataSource.sortByProductCount,
+                  onSort: dataSource.sortByPrice,
+                ),
+                DataColumn(
+                  label: Text('Discount'),
+                  numeric: true,
+                  onSort: dataSource.sortByDiscount,
+                ),
+                DataColumn(
+                  label: Text('Discounted\nPrice'),
+                  numeric: true,
+                  onSort: dataSource.sortByDiscountedPrice,
+                ),
+                DataColumn(
+                  label: Text('Stock'),
+                  numeric: true,
+                  onSort: dataSource.sortByStock,
                 ),
                 DataColumn(label: Text('Menu'), numeric: true),
               ],

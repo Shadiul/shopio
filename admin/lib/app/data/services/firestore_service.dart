@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 
 import '../enums.dart';
 import '../models/models.dart';
+import '../models/product_model.dart';
 
 const _collectionCategories = 'categories';
 const _collectionProducts = 'products';
@@ -57,21 +58,6 @@ class FirestoreService extends GetxService {
         status: ResponseStatus.error,
         message: e.toString(),
       );
-    }
-  }
-
-  Future<ResponseModel> updateCategoryIcon(String id, String value) async {
-    try {
-      await _firestore.collection(_collectionCategories).doc(id).update(
-        {'icon': value},
-      );
-
-      return ResponseModel(
-        status: ResponseStatus.success,
-        message: 'Success updating icon',
-      );
-    } catch (e) {
-      return ResponseModel(status: ResponseStatus.error, message: e.toString());
     }
   }
 
@@ -155,6 +141,93 @@ class FirestoreService extends GetxService {
         status: ResponseStatus.error,
         message: e.toString(),
       );
+    }
+  }
+
+  Future<ResponseModel> deleteProduct(String id) async {
+    try {
+      await _firestore.collection(_collectionProducts).doc(id).delete();
+      return ResponseModel(
+        status: ResponseStatus.success,
+        message: 'Delete product success',
+      );
+    } catch (e) {
+      return ResponseModel(
+        status: ResponseStatus.error,
+        message: e.toString(),
+      );
+    }
+  }
+
+  Future<ResponseModel> createProduct({
+    required String name,
+    required String description,
+    required double price,
+    required int discount,
+    int stockQuantity = 0,
+    required String unit,
+    required String categoryId,
+    List<String> images = const [],
+  }) async {
+    try {
+      final doc = await _firestore.collection(_collectionProducts).add(
+            ProductModel(
+              id: '',
+              name: name,
+              description: description,
+              price: price,
+              discount: discount,
+              stockQuantity: stockQuantity,
+              unit: unit,
+              categoryId: categoryId,
+              images: images,
+            ).toJson(),
+          );
+      await doc.update({'id': doc.id});
+
+      return ResponseModel(
+        status: ResponseStatus.success,
+        message: 'Success creating product',
+      );
+    } catch (e) {
+      return ResponseModel(
+        status: ResponseStatus.error,
+        message: e.toString(),
+      );
+    }
+  }
+
+  Future<ResponseModel> updateProduct({
+    required String id,
+    required String name,
+    required String description,
+    required double price,
+    required int discount,
+    int stockQuantity = 0,
+    required String unit,
+    required String categoryId,
+    List<String> images = const [],
+  }) async {
+    try {
+      await _firestore.collection(_collectionProducts).doc(id).update(
+        {
+          'name': name,
+          'description': description,
+          'price': price,
+          'discount': discount,
+          'stock_quantity': stockQuantity,
+          'unit': unit,
+          'category_id': categoryId,
+          'images': images,
+        },
+      );
+
+      return ResponseModel(
+        status: ResponseStatus.success,
+        message: 'Success updating category',
+      );
+    } catch (e) {
+      return ResponseModel(status: ResponseStatus.error, message: e.toString());
     }
   }
 }

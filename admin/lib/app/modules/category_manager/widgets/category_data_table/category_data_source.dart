@@ -5,10 +5,6 @@ import 'package:intl/intl.dart';
 import 'category_data_table_controller.dart';
 
 class CategoryDataSource extends DataTableSource {
-  final BuildContext context;
-
-  CategoryDataSource(this.context);
-
   final CategoryDataTableController controller =
       Get.find<CategoryDataTableController>();
 
@@ -16,9 +12,6 @@ class CategoryDataSource extends DataTableSource {
   DataRow? getRow(int index) {
     return DataRow.byIndex(
       index: index,
-      color: index % 2 == 0
-          ? MaterialStateProperty.all(Theme.of(context).highlightColor)
-          : null,
       cells: [
         DataCell(Text((index + 1).toString())),
         DataCell(
