@@ -29,9 +29,29 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
                           Icons.shopping_bag,
                           size: 128,
                         )
-                      : Image.network(
-                          controller.product.images.first,
-                          fit: BoxFit.cover,
+                      : PageView.builder(
+                          itemCount: controller.product.images.length,
+                          itemBuilder: (context, index) => Stack(
+                            alignment: Alignment.topRight,
+                            children: [
+                              Image.network(
+                                controller.product.images.first,
+                                fit: BoxFit.cover,
+                              ),
+                              Container(
+                                padding: const EdgeInsets.all(16),
+                                decoration: BoxDecoration(
+                                  color: Colors.black.withOpacity(0.75),
+                                ),
+                                child: Text(
+                                  '${index + 1}/${controller.product.images.length}',
+                                  style: _textTheme.headline6?.copyWith(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
                         ),
                 ),
                 Padding(

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -63,8 +64,8 @@ class CategoryMiniWidget extends GetWidget<ExploreController> {
                               materialTapTargetSize:
                                   MaterialTapTargetSize.shrinkWrap,
                               padding: const EdgeInsets.all(16.0),
-                              child: Image.asset(
-                                'assets/icons/${category.icon}.png',
+                              child: CachedNetworkImage(
+                                imageUrl: category.icon,
                                 fit: BoxFit.contain,
                                 color: Colors.white,
                               ),
