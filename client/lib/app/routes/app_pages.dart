@@ -1,18 +1,21 @@
 import 'package:get/get.dart';
 
-import 'package:client/app/modules/cart/cart_binding.dart';
-import 'package:client/app/modules/cart/cart_view.dart';
-import 'package:client/app/modules/product_details/product_details_binding.dart';
-import 'package:client/app/modules/product_details/product_details_view.dart';
-import 'package:client/app/modules/product_list/product_list_binding.dart';
-import 'package:client/app/modules/product_list/product_list_view.dart';
-
 import '../modules/account/account_binding.dart';
 import '../modules/account/account_view.dart';
+import '../modules/cart/cart_binding.dart';
+import '../modules/cart/cart_view.dart';
 import '../modules/explore/explore_binding.dart';
 import '../modules/explore/explore_view.dart';
 import '../modules/home/home_binding.dart';
 import '../modules/home/home_view.dart';
+import '../modules/payment/payment_binding.dart';
+import '../modules/payment/payment_view.dart';
+import '../modules/product_details/product_details_binding.dart';
+import '../modules/product_details/product_details_view.dart';
+import '../modules/product_list/product_list_binding.dart';
+import '../modules/product_list/product_list_view.dart';
+import '../modules/search/search_binding.dart';
+import '../modules/search/search_view.dart';
 import '../modules/sign_in/sign_in_binding.dart';
 import '../modules/sign_in/sign_in_view.dart';
 import '../modules/sign_up/sign_up_binding.dart';
@@ -74,6 +77,16 @@ class AppPages {
       name: _Paths.CART,
       page: () => CartView(),
       binding: CartBinding(),
+    ),
+    GetPage(
+      name: _Paths.PAYMENT,
+      page: () => PaymentView(),
+      binding: PaymentBinding(),
+    ),
+    GetPage(
+      name: _Paths.SEARCH,
+      page: () => SearchView(),
+      binding: SearchBinding(),
     ),
   ];
 }

@@ -1,3 +1,4 @@
+import 'package:client/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -21,8 +22,12 @@ class ExploreView extends GetView<ExploreController> {
             horizontal: 16.0,
             vertical: 8.0,
           ),
-          child: const TextField(
-            decoration: InputDecoration(
+          child: TextField(
+            readOnly: true,
+            onTap: () async {
+              await Get.toNamed(Routes.SEARCH);
+            },
+            decoration: const InputDecoration(
               label: Text('Search'),
               prefixIcon: Icon(Icons.search),
             ),

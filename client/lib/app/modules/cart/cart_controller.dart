@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../data/models/models.dart';
@@ -15,5 +16,27 @@ class CartController extends GetxController {
       parameters: {'id': product.id},
       arguments: product,
     );
+  }
+
+  Future<void> onTapPlaceOrder() async {
+    if (cart.items.isNotEmpty) {
+      await Get.toNamed(
+        Routes.PAYMENT,
+      );
+
+      return;
+    }
+
+    if (cart.items.isEmpty) {
+      if (Get.isSnackbarOpen != null && !Get.isSnackbarOpen!) {
+        Get.showSnackbar(GetBar(
+          snackPosition: SnackPosition.TOP,
+          icon: const Icon(Icons.error),
+          message: 'No items in your cart!',
+          duration: const Duration(seconds: 2),
+          isDismissible: true,
+        ));
+      }
+    }
   }
 }

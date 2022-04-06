@@ -49,13 +49,20 @@ class CartView extends GetView<CartController> {
         ),
         const Divider(),
         Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0.0),
           child: Obx(
             () => Text(
               'Total: ' + controller.cart.totalPrice.toString(),
               textAlign: TextAlign.end,
               style: _textTheme.subtitle1,
             ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: ElevatedButton(
+            onPressed: controller.onTapPlaceOrder,
+            child: const Text('Place Order'),
           ),
         ),
       ],

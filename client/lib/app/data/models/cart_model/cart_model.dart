@@ -56,6 +56,11 @@ class CartModel {
     calculateTotal();
   }
 
+  void removeAllItem() {
+    items.clear();
+    calculateTotal();
+  }
+
   void decreaseItem(ProductModel product) {
     int index = items.indexWhere((element) => element.product.id == product.id);
 
