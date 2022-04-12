@@ -42,30 +42,32 @@ class BestSellerMiniWidget extends GetWidget<ExploreController> {
             horizontal: 16.0,
             vertical: 8.0,
           ),
-          child: GridView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              crossAxisSpacing: 16.0,
-              mainAxisSpacing: 16.0,
-              // childAspectRatio: 9 / 16,
-              mainAxisExtent: 220,
-            ),
-            itemCount: 4,
-            itemBuilder: (context, index) => ProductCardWidget(
-              product: ProductModel(
-                id: '1',
-                description: 'asdasd',
-                discount: 10,
-                name: 'asdad',
-                price: 1000.0,
-                stockQuantity: 50,
-                unit: 'pcs',
-                categoryId: '1',
-              ),
-            ),
-          ),
+          child: FutureBuilder<List<ProductModel>>(
+              future: controller.getBestSellerProducts(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  final products = snapshot.data;
+                  return GridView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 16.0,
+                      mainAxisSpacing: 16.0,
+                      // childAspectRatio: 9 / 16,
+                      mainAxisExtent: 220,
+                    ),
+                    itemCount: products?.length,
+                    itemBuilder: (context, index) => ProductCardWidget(
+                      product: products![index],
+                      onTap: () async =>
+                          controller.onTapProduct(products[index]),
+                    ),
+                  );
+                }
+                return const CircularProgressIndicator();
+              }),
         )
       ],
     );

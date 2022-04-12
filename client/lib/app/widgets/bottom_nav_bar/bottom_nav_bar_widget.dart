@@ -35,10 +35,6 @@ class BottomNavBarWidget extends GetView<BottomNavBarController> {
               icon: const Icon(Icons.shopping_cart),
             ),
             SalomonBottomBarItem(
-              title: const Text('Wishlist'),
-              icon: const Icon(Icons.favorite),
-            ),
-            SalomonBottomBarItem(
               title: const Text('Account'),
               icon: const Icon(Icons.account_circle),
             ),

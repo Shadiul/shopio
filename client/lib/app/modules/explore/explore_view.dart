@@ -33,7 +33,7 @@ class ExploreView extends GetView<ExploreController> {
             ),
           ),
         ),
-        const HotSalesMiniWidget(),
+        // const HotSalesMiniWidget(),
         const BestSellerMiniWidget(),
       ],
     );

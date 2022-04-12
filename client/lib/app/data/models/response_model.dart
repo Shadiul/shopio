@@ -1,11 +1,11 @@
 import '../../utils/log_colored.dart';
 import '../enums.dart';
 
-class ResponseModel {
+class ResponseModel<T> {
   final ResponseStatus status;
   final String? code;
   final String message;
-  final dynamic data;
+  final T? data;
 
   ResponseModel({
     required this.status,

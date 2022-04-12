@@ -1,3 +1,4 @@
+import 'package:client/app/data/models/models.dart';
 import 'package:get/get.dart';
 
 import '../../data/enums.dart';
@@ -32,6 +33,23 @@ class ExploreController extends GetxController {
       Routes.PRODUCT_LIST,
       parameters: {'category_id': category.id},
       arguments: category,
+    );
+  }
+
+  Future<List<ProductModel>> getBestSellerProducts() async {
+    final response = await _firestoreService.getBestSellerProducts();
+    if (response.status == ResponseStatus.success) {
+      return response.data!;
+    } else {
+      return [];
+    }
+  }
+
+  Future<void> onTapProduct(ProductModel product) async {
+    await Get.toNamed(
+      Routes.PRODUCT_DETAILS,
+      parameters: {'id': product.id},
+      arguments: product,
     );
   }
 }

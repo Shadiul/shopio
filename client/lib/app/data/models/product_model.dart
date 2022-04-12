@@ -10,6 +10,7 @@ class ProductModel {
   final String unit;
   int stockQuantity;
   final List<String> images;
+  final List<String> tags;
 
   ProductModel({
     required this.id,
@@ -21,6 +22,7 @@ class ProductModel {
     required this.unit,
     required this.stockQuantity,
     this.images = const [],
+    this.tags = const [],
   });
 
   double get priceAfterDiscount => price - ((price * discount) / 100);
@@ -37,6 +39,7 @@ class ProductModel {
       discount: json['discount'] ?? 0.0,
       stockQuantity: json['stock_quantity'] ?? 0,
       images: _mapImages(json['images']),
+      tags: _mapTags(json['tags']),
     );
   }
 
@@ -73,6 +76,14 @@ class ProductModel {
   }
 
   static List<String> _mapImages(List<dynamic>? data) {
+    if (data is List) {
+      return List<String>.from(data.map((e) => e)).toList();
+    } else {
+      return [];
+    }
+  }
+
+  static List<String> _mapTags(List<dynamic>? data) {
     if (data is List) {
       return List<String>.from(data.map((e) => e)).toList();
     } else {
