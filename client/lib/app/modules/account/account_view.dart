@@ -40,18 +40,18 @@ class AccountView extends GetView<AccountController> {
         ),
         const SizedBox(height: 16.0),
         const Divider(height: 0),
-        ListTile(
-          onTap: () {},
-          leading: const Icon(Icons.delivery_dining),
-          title: const Text('My Orders'),
-          trailing: const Icon(Icons.chevron_right),
-        ),
-        ListTile(
-          onTap: () {},
-          leading: const Icon(Icons.edit),
-          title: const Text('Edit Profile'),
-          trailing: const Icon(Icons.chevron_right),
-        ),
+        // ListTile(
+        //   onTap: () {},
+        //   leading: const Icon(Icons.delivery_dining),
+        //   title: const Text('My Orders'),
+        //   trailing: const Icon(Icons.chevron_right),
+        // ),
+        // ListTile(
+        //   onTap: () {},
+        //   leading: const Icon(Icons.edit),
+        //   title: const Text('Edit Profile'),
+        //   trailing: const Icon(Icons.chevron_right),
+        // ),
         ListTile(
           onTap: controller.onTapLogout,
           leading: const Icon(Icons.logout),

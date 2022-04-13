@@ -32,21 +32,24 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
                       : PageView.builder(
                           itemCount: controller.product.images.length,
                           itemBuilder: (context, index) => Stack(
-                            alignment: Alignment.topRight,
+                            fit: StackFit.expand,
                             children: [
                               Image.network(
-                                controller.product.images.first,
+                                controller.product.images[index],
                                 fit: BoxFit.cover,
                               ),
-                              Container(
-                                padding: const EdgeInsets.all(16),
-                                decoration: BoxDecoration(
-                                  color: Colors.black.withOpacity(0.75),
-                                ),
-                                child: Text(
-                                  '${index + 1}/${controller.product.images.length}',
-                                  style: _textTheme.headline6?.copyWith(
-                                    color: Colors.white,
+                              Align(
+                                alignment: Alignment.topRight,
+                                child: Container(
+                                  padding: const EdgeInsets.all(16),
+                                  decoration: BoxDecoration(
+                                    color: Colors.black.withOpacity(0.75),
+                                  ),
+                                  child: Text(
+                                    '${index + 1}/${controller.product.images.length}',
+                                    style: _textTheme.headline6?.copyWith(
+                                      color: Colors.white,
+                                    ),
                                   ),
                                 ),
                               )

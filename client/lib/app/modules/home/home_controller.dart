@@ -34,9 +34,9 @@ class HomeController extends GetxController {
       case 1:
         return const CartView();
       case 2:
-        return Container();
-      case 3:
         return const AccountView();
+      // case 3:
+      //   return const AccountView();
       default:
         return Container();
     }
