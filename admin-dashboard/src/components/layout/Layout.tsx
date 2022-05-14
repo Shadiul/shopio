@@ -12,10 +12,10 @@ const Layout: FC<LayoutProps> = () => {
   return (
     <div className="h-screen flex">
       <Drawer open={drawerOpen} onClose={toggleDrawer} />
-      <div className="flex-1 ">
+      <div className="flex-1 w-full">
         <AppBar toggleDrawer={toggleDrawer} />
 
-        <div className="p-4">
+        <div className="p-0">
           <Outlet />
         </div>
       </div>

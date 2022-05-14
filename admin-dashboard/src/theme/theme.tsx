@@ -9,6 +9,9 @@ const THEME = createTheme({
         root: { width: "256px" },
       },
     },
+    MuiDialogActions: {
+      styleOverrides: { root: { padding: "24px" } },
+    },
   },
 });
 

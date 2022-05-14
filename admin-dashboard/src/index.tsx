@@ -1,3 +1,4 @@
+import NiceModal from "@ebay/nice-modal-react";
 import { ThemeProvider } from "@mui/material";
 import React from "react";
 import ReactDOM from "react-dom/client";
@@ -14,7 +15,9 @@ root.render(
   <React.StrictMode>
     <ThemeProvider theme={THEME}>
       <BrowserRouter>
-        <App />
+        <NiceModal.Provider>
+          <App />
+        </NiceModal.Provider>
       </BrowserRouter>
     </ThemeProvider>
   </React.StrictMode>
