@@ -1,4 +1,9 @@
-import { Dashboard, ShoppingBag } from "@mui/icons-material";
+import {
+  AccountCircle,
+  Category,
+  Dashboard,
+  ShoppingBag,
+} from "@mui/icons-material";
 import {
   Drawer as MuiDrawer,
   ListItemButton,
@@ -27,6 +32,16 @@ const DRAWER_ITEMS: IDrawerItem[] = [
     name: "products",
     icon: <ShoppingBag />,
     path: PATHS.products,
+  },
+  {
+    name: "categories",
+    icon: <Category />,
+    path: PATHS.categories,
+  },
+  {
+    name: "users",
+    icon: <AccountCircle />,
+    path: PATHS.users,
   },
 ];
 

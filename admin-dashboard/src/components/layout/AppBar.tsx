@@ -31,7 +31,7 @@ const AppBar: FC<AppBarProps> = ({ toggleDrawer }) => {
       <Toolbar>
         {isMobileScreen && (
           <IconButton onClick={toggleDrawer}>
-            <Menu />
+            <Menu sx={{ color: "primary.contrastText" }} />
           </IconButton>
         )}
 
@@ -53,6 +53,10 @@ const getTitleFromPathname = (pathname: string) => {
       return "dashboard";
     case PATHS.products:
       return "products";
+    case PATHS.categories:
+      return "categories";
+    case PATHS.users:
+      return "users";
     default:
       return;
   }

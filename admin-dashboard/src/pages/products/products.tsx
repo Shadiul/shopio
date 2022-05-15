@@ -1,7 +1,6 @@
 import { useModal } from "@ebay/nice-modal-react";
 import { Add, Delete, Edit } from "@mui/icons-material";
 import {
-  Button,
   Chip,
   Fab,
   IconButton,
@@ -36,7 +35,7 @@ const ProductsPage = () => {
   };
 
   return (
-    <div className="">
+    <div>
       <Fab
         color="primary"
         onClick={() => createProductModal.show()}
