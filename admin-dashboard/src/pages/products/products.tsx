@@ -20,6 +20,7 @@ import { useCollection } from "react-firebase-hooks/firestore";
 import { firestore } from "../../configs/firebase";
 import { IProduct } from "../../interfaces/IProduct";
 import CreateProductModal from "./components/CreateProductModal";
+import DeleteProductModal from "./components/DeleteProductModal";
 import EditProductModal from "./components/EditProductModal";
 
 const ProductsPage = () => {
@@ -29,10 +30,7 @@ const ProductsPage = () => {
 
   const createProductModal = useModal(CreateProductModal);
   const editProductModal = useModal(EditProductModal);
-
-  const deleteProduct = async (id: string) => {
-    await firestore.collection("products").doc(id).delete();
-  };
+  const deleteProductModal = useModal(DeleteProductModal);
 
   return (
     <div>
@@ -97,7 +95,7 @@ const ProductsPage = () => {
                       </IconButton>
                       <IconButton
                         onClick={async (event) => {
-                          await deleteProduct(data.id);
+                          deleteProductModal.show({ product: data });
                         }}
                       >
                         <Delete />
