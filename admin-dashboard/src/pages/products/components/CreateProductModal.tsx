@@ -7,10 +7,17 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
+  FormControl,
+  FormHelperText,
   IconButton,
+  InputLabel,
+  MenuItem,
+  Select,
   TextField,
 } from "@mui/material";
+import { collection } from "firebase/firestore";
 import { useState } from "react";
+import { useCollection } from "react-firebase-hooks/firestore";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { firestore } from "../../../configs/firebase";
 import { ICreateProductFormInput } from "../../../interfaces/IProduct";
@@ -20,6 +27,10 @@ const CreateProductModal = NiceModal.create(() => {
   const modal = useModal();
 
   const [loading, setLoading] = useState(false);
+
+  const [categoriesSnapshot] = useCollection(
+    collection(firestore, "categories")
+  );
 
   const createProduct = async (data: ICreateProductFormInput) => {
     setLoading(true);
@@ -68,6 +79,37 @@ const CreateProductModal = NiceModal.create(() => {
                 error={!!fieldState.error}
                 helperText={fieldState.error?.message}
               />
+            )}
+          />
+
+          <Controller
+            name="category_id"
+            control={control}
+            defaultValue=""
+            render={({ field, fieldState }) => (
+              <FormControl>
+                <InputLabel id="category">Category</InputLabel>
+                <Select
+                  {...field}
+                  labelId="category"
+                  label="Category"
+                  placeholder="Product Category"
+                  error={!!fieldState.error}
+                >
+                  <MenuItem value="">None</MenuItem>
+                  {categoriesSnapshot?.docs.map((doc, index) => {
+                    const data = doc.data();
+                    return (
+                      <MenuItem key={index} value={data.id}>
+                        {data.name}
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+                {fieldState.error && (
+                  <FormHelperText>{fieldState.error?.message}</FormHelperText>
+                )}
+              </FormControl>
             )}
           />
 

@@ -1,6 +1,7 @@
 export interface IProduct {
   id: string;
   name: string;
+  category_id: string;
   description: string;
   price: number;
   discount: number;
@@ -12,6 +13,7 @@ export interface IProduct {
 export interface ICreateProductFormInput {
   id: string;
   name: string;
+  category_id: string;
   description: string;
   price: number;
   discount: number;

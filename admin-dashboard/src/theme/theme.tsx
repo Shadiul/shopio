@@ -1,6 +1,9 @@
-import { createTheme } from "@mui/material";
+import { colors, createTheme } from "@mui/material";
 
 const THEME = createTheme({
+  palette: {
+    primary: colors.deepPurple,
+  },
   components: {
     MuiDrawer: {
       defaultProps: {},
