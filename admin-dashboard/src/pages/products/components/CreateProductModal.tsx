@@ -1,6 +1,6 @@
 import NiceModal, { useModal } from "@ebay/nice-modal-react";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Close } from "@mui/icons-material";
+import { Add, Close, Delete } from "@mui/icons-material";
 import {
   Button,
   Dialog,
@@ -51,6 +51,8 @@ const CreateProductModal = NiceModal.create(() => {
     reset();
     modal.remove();
   };
+
+  const [images, setImages] = useState<string[]>([]);
 
   return (
     <Dialog open={modal.visible} onClose={modal.remove}>
@@ -218,6 +220,40 @@ const CreateProductModal = NiceModal.create(() => {
               />
             )}
           />
+
+          <div className="flex flex-wrap gap-4 max-w-md ">
+            {images.map((image, index) => {
+              return (
+                <div key={index} className="h-24 w-24 bg-gray-400 flex">
+                  <img
+                    src={image}
+                    height="200px"
+                    width="200px"
+                    alt={image}
+                    className="object-cover"
+                  />
+                  <div className="z-10 flex justify-center items-center">
+                    <IconButton>
+                      <Delete />
+                    </IconButton>
+                  </div>
+                </div>
+              );
+            })}
+            <div className="h-24 w-24 bg-gray-200 flex justify-center items-center">
+              <IconButton
+                onClick={() => {
+                  const newImages = [
+                    ...images,
+                    "https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+                  ];
+                  return setImages(newImages);
+                }}
+              >
+                <Add />
+              </IconButton>
+            </div>
+          </div>
         </DialogContent>
 
         <DialogActions>
