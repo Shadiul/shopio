@@ -8,6 +8,7 @@ export interface IProduct {
   stock_quantity: number;
   tags: string[];
   unit: string;
+  images: string[];
 }
 
 export interface ICreateProductFormInput {
@@ -20,5 +21,6 @@ export interface ICreateProductFormInput {
   stock_quantity: number;
   tags: string;
   unit: string;
+  images: string[];
 }
 export interface IEditProductFormInput extends ICreateProductFormInput {}

@@ -43,7 +43,6 @@ const UsersPage = () => {
               <TableCell>UID</TableCell>
               <TableCell>Name</TableCell>
               <TableCell>Email</TableCell>
-              <TableCell>Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -54,16 +53,6 @@ const UsersPage = () => {
                   <TableCell>{data.uid}</TableCell>
                   <TableCell>{data.name}</TableCell>
                   <TableCell>{data.email}</TableCell>
-                  <TableCell>
-                    <Stack direction="row">
-                      <IconButton onClick={(event) => {}}>
-                        <Edit />
-                      </IconButton>
-                      <IconButton onClick={async (event) => {}}>
-                        <Delete />
-                      </IconButton>
-                    </Stack>
-                  </TableCell>
                 </TableRow>
               );
             })}

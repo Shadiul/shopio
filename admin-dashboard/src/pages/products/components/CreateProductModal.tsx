@@ -14,6 +14,7 @@ import {
   MenuItem,
   Select,
   TextField,
+  Typography,
 } from "@mui/material";
 import { collection } from "firebase/firestore";
 import { useState } from "react";
@@ -46,13 +47,26 @@ const CreateProductModal = NiceModal.create(() => {
     resolver: yupResolver(CREATE_PRODUCT_SCHEMA),
   });
 
+  const [images, setImages] = useState<string[]>([]);
+  const [imageUrl, setImageUrl] = useState("");
+
+  const onAddImageUrl = () => {
+    if (imageUrl && imageUrl.length > 1) {
+      var joined = images.concat(imageUrl);
+      setImages(joined);
+      setImageUrl("");
+    }
+  };
+
+  const onDeleteImage = (index: number) => {
+    setImages(images.filter((image, i) => i !== index));
+  };
+
   const onSubmit: SubmitHandler<ICreateProductFormInput> = (data) => {
-    createProduct(data);
+    createProduct({ ...data, images: images });
     reset();
     modal.remove();
   };
-
-  const [images, setImages] = useState<string[]>([]);
 
   return (
     <Dialog open={modal.visible} onClose={modal.remove}>
@@ -221,37 +235,44 @@ const CreateProductModal = NiceModal.create(() => {
             )}
           />
 
-          <div className="flex flex-wrap gap-4 max-w-md ">
-            {images.map((image, index) => {
-              return (
-                <div key={index} className="h-24 w-24 bg-gray-400 flex">
-                  <img
-                    src={image}
-                    height="200px"
-                    width="200px"
-                    alt={image}
-                    className="object-cover"
-                  />
-                  <div className="z-10 flex justify-center items-center">
-                    <IconButton>
+          <div className="flex flex-col gap-4">
+            <Typography>Images</Typography>
+            {images.length < 1 && <Typography>No Images</Typography>}
+            <div className="grid grid-cols-4 gap-4">
+              {images.map((image, index) => (
+                <div
+                  key={index}
+                  className="relative h-full w-full border-2 bg-gray-500"
+                >
+                  <div className="absolute z-10 top-1/4 left-1/4 flex justify-center">
+                    <IconButton
+                      onClick={() => onDeleteImage(index)}
+                      sx={{
+                        backgroundColor: "primary.light",
+                        opacity: 0.5,
+                        ":hover": {
+                          opacity: 1,
+                          backgroundColor: "primary.light",
+                        },
+                      }}
+                    >
                       <Delete />
                     </IconButton>
                   </div>
+                  <img src={image} alt={""} className="" />
                 </div>
-              );
-            })}
-            <div className="h-24 w-24 bg-gray-200 flex justify-center items-center">
-              <IconButton
-                onClick={() => {
-                  const newImages = [
-                    ...images,
-                    "https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-                  ];
-                  return setImages(newImages);
-                }}
-              >
-                <Add />
-              </IconButton>
+              ))}
+            </div>
+            <div className="flex gap-4">
+              <TextField
+                fullWidth
+                placeholder="Image URL"
+                value={imageUrl}
+                onChange={(event) => setImageUrl(event.target.value)}
+              />
+              <Button variant="contained" onClick={onAddImageUrl}>
+                Add
+              </Button>
             </div>
           </div>
         </DialogContent>

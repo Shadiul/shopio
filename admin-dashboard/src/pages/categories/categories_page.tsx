@@ -1,3 +1,4 @@
+import { useModal } from "@ebay/nice-modal-react";
 import { Add, Delete, Edit } from "@mui/icons-material";
 import {
   Fab,
@@ -17,17 +18,26 @@ import React from "react";
 import { useCollection } from "react-firebase-hooks/firestore";
 import { firestore } from "../../configs/firebase";
 import { ICategory } from "../../interfaces/ICategory";
+import CreateCategoryModal from "./components/CreateCategoryModal";
+import DeleteCategoryModal from "./components/DeleteCategoryModal";
+import EditCategoryModal from "./components/EditCategoryModal";
 
 const CategoriesPage = () => {
   const [snapshot, loading, error] = useCollection(
     collection(firestore, "categories")
   );
 
+  const createCategoryModal = useModal(CreateCategoryModal);
+  const editCategoryModal = useModal(EditCategoryModal);
+  const deleteCategoryModal = useModal(DeleteCategoryModal);
+
   return (
     <div>
       <Fab
         color="primary"
-        onClick={() => {}}
+        onClick={() => {
+          createCategoryModal.show();
+        }}
         sx={{
           position: "absolute",
           bottom: "16px",
@@ -56,10 +66,18 @@ const CategoriesPage = () => {
                   <TableCell align="right">{data.products_count}</TableCell>
                   <TableCell>
                     <Stack direction="row">
-                      <IconButton onClick={(event) => {}}>
+                      <IconButton
+                        onClick={(event) => {
+                          editCategoryModal.show({ category: data });
+                        }}
+                      >
                         <Edit />
                       </IconButton>
-                      <IconButton onClick={async (event) => {}}>
+                      <IconButton
+                        onClick={async (event) => {
+                          deleteCategoryModal.show({ category: data });
+                        }}
+                      >
                         <Delete />
                       </IconButton>
                     </Stack>

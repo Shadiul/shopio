@@ -1,6 +1,6 @@
 import NiceModal, { useModal } from "@ebay/nice-modal-react";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Close } from "@mui/icons-material";
+import { Close, Delete } from "@mui/icons-material";
 import {
   Button,
   Dialog,
@@ -14,6 +14,7 @@ import {
   MenuItem,
   Select,
   TextField,
+  Typography,
 } from "@mui/material";
 import { collection } from "firebase/firestore";
 import { useState } from "react";
@@ -47,8 +48,22 @@ const EditProductModal = NiceModal.create<EditProductsProps>(({ product }) => {
     resolver: yupResolver(EDIT_PRODUCT_SCHEMA),
   });
 
+  const [images, setImages] = useState<string[]>(product.images ?? []);
+  const [imageUrl, setImageUrl] = useState("");
+
+  const onAddImageUrl = () => {
+    if (imageUrl && imageUrl.length > 1) {
+      var joined = images.concat(imageUrl);
+      setImages(joined);
+      setImageUrl("");
+    }
+  };
+  const onDeleteImage = (index: number) => {
+    setImages(images.filter((image, i) => i !== index));
+  };
+
   const onSubmit: SubmitHandler<IEditProductFormInput> = (data) => {
-    editProduct(data);
+    editProduct({ ...data, images: images });
     reset();
     modal.remove();
   };
@@ -221,6 +236,47 @@ const EditProductModal = NiceModal.create<EditProductsProps>(({ product }) => {
               />
             )}
           />
+
+          <div className="flex flex-col gap-4">
+            <Typography>Images</Typography>
+            {images.length < 1 && <Typography>No Images</Typography>}
+            <div className="grid grid-cols-4 gap-4">
+              {images.map((image, index) => (
+                <div
+                  key={index}
+                  className="relative h-full w-full border-2 bg-gray-500"
+                >
+                  <div className="absolute z-10 top-1/4 left-1/4 flex justify-center">
+                    <IconButton
+                      onClick={() => onDeleteImage(index)}
+                      sx={{
+                        backgroundColor: "primary.light",
+                        opacity: 0.5,
+                        ":hover": {
+                          opacity: 1,
+                          backgroundColor: "primary.light",
+                        },
+                      }}
+                    >
+                      <Delete />
+                    </IconButton>
+                  </div>
+                  <img src={image} alt={product.name} className="" />
+                </div>
+              ))}
+            </div>
+            <div className="flex gap-4">
+              <TextField
+                fullWidth
+                placeholder="Image URL"
+                value={imageUrl}
+                onChange={(event) => setImageUrl(event.target.value)}
+              />
+              <Button variant="contained" onClick={onAddImageUrl}>
+                Add
+              </Button>
+            </div>
+          </div>
         </DialogContent>
 
         <DialogActions>
